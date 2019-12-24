@@ -1,4 +1,4 @@
-English | [简体中文](./README_zh-CN.md)
+[English](./README.md) | 简体中文
 
 # @wetrial/core
 
@@ -7,36 +7,37 @@ React Hooks Library.
 [![NPM version][image-1]][1]   [![NPM downloads][image-2]][2]   
 ![npm status][image-npm]   ![test status][image-test] 
 
-## 📚 Document
+## 📚 文档
 
 * [English](https://wetrial-components.now.sh/)
 * [中文](https://wetrial-components.now.sh/zh-cn/)
 
-## ✨ Features
+## ✨ 特性
 
-* Easy to learn and use.
-* Contains a wealth of advanced Hooks that are refined from the app.
-* Contains a wealth of basic Hooks.
-* Written in TypeScript with predictable static types.
+* 易学易用
+* 包含大量提炼自应用的高级 Hooks。
+* 包含丰富的基础 Hooks。
+* 使用 TypeScript 构建，提供完整的类型定义文件。
 
-## 📣 Explain
+## 📣 说明
 
-**You can use umi hooks anywhere, with any component library.**
-Although our examples are based on ant design, it does not mean that our Hooks can only be used with ant design.
+**你可以将 umi hooks 使用在任何地方，和任意组件库搭配使用。**
+虽然我们的代码示例都是基于 ant design 的，但是并不代表我们的 Hooks 只能和 ant design 配合使用。
 
-## 📦 Install
+
+## 📦 安装
 
 ```
 npm i @wetrial/core --save
 ```
 
-## 🔨 Usage
+## 🔨使用
 
 ```
 import { Ellipsis } from '@wetrial/core';
 ```
 
-## 🖥 Development
+## 🖥 开发
 
 ```
 $ git clone git@github.com:wetrial/core.git
@@ -44,11 +45,11 @@ $ cd hooks
 $ npm install
 $ npm start
 ```
-Open your browser and visit http://127.0.0.1:8001 , see more at Development.
+打开浏览器访问 http://127.0.0.1:8001
 
-## 🤝 Contributing
+## 🤝 贡献
 
-We welcome all contributions, please read our [CONTRIBUTING.MD](https://github.com/wetrial/core/blob/master/CONTRIBUTING.MD) first, let's build a better hooks library together.
+我们欢迎所有人参与共建，请参考[CONTRIBUTING.MD](https://github.com/wetrial/core/blob/master/CONTRIBUTING.MD)
 
 ## ✅ License
 
@@ -62,3 +63,4 @@ We welcome all contributions, please read our [CONTRIBUTING.MD](https://github.c
 [image-2]:	https://img.shields.io/npm/dm/@wetrial/core.svg?style=flat  
 [image-npm]: https://github.com/wetrial/core/workflows/Publish%20NPM/badge.svg  
 [image-test]: https://github.com/wetrial/core/workflows/TEST/badge.svg
+

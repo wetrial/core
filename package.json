@@ -1,0 +1,104 @@
+{
+  "name": "@wetrial/core",
+  "version": "0.0.1",
+  "description": "react component library",
+  "keywords": [
+    "antd components",
+    "react components"
+  ],
+  "main": "./lib/index.js",
+  "module": "./es/index.js",
+  "types": "./lib/index.d.ts",
+  "authors": {
+    "name": "xiexingen",
+    "email": "1002275364@qq.com"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.com/"
+  },
+  "repository": "https://github.com/wetrial/core",
+  "homepage": "https://github.com/wetrial/core",
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "father doc dev",
+    "dev:zh-cn": "cross-env LAN=zh-CN father doc dev",
+    "js": "node ./.ts2js.js",
+    "build": "node ./scripts/clean-old-build.js && father build && tsc --declarationDir ./lib && tsc --declarationDir ./es && node ./scripts/build-wind-up.js",
+    "test": "father test",
+    "cov": "father test --coverage",
+    "help": "father help",
+    "precommit": "father pre-commit",
+    "build:doc": "father doc build &&cross-env LAN=zh-CN father doc build",
+    "pub:doc": "now --prod",
+    "patch": "yarn version --patch && git push origin master && git push origin --tags",
+    "minor": "yarn version --minor && git push origin master && git push origin --tags",
+    "major": "yarn version --major && git push origin master && git push origin --tags",
+    "lint": "yarn lint:js && yarn lint:style && yarn lint:prettier",
+    "lint-staged": "lint-staged",
+    "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx ",
+    "lint:fix": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src && yarn lint:style",
+    "lint:js": "eslint --debug --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./",
+    "lint:prettier": "check-prettier lint",
+    "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
+    "prettier": "prettier -c --write \"**/*\""
+  },
+  "files": [
+    "dist",
+    "lib",
+    "es",
+    "README.md",
+    "LICENSE",
+    "package.json"
+  ],
+  "dependencies": {
+    "store": "^2.0.12"
+  },
+  "peerDependencies": {
+    "antd": "^3.20.1",
+    "axios": "^0.19.0",
+    "lodash": "^4.17.15",
+    "lodash-decorators": "^6.0.1",
+    "react": "^16.8.6"
+  },
+  "devDependencies": {
+    "@testing-library/react-hooks": "^2.0.1",
+    "@types/jest": "^24.0.15",
+    "@types/lodash": "^4.14.149",
+    "@umijs/fabric": "^1.2.12",
+    "antd": "^3.20.1",
+    "babel-plugin-import": "^1.12.0",
+    "cross-env": "^6.0.3",
+    "del": "^5.1.0",
+    "docz-theme-umi-hooks": "^0.0.7",
+    "enzyme": "^3.10.0",
+    "father": "^2.13.3",
+    "husky": "^3.1.0",
+    "jackbox": "^0.2.0",
+    "now": "^16.7.0",
+    "raw-loader": "^3.1.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-drag-listview": "^0.1.6",
+    "resize-observer-polyfill": "^1.5.1",
+    "sylvanas": "^0.4.2",
+    "typescript": "^3.3.3"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.less": "stylelint --syntax less",
+    "**/*.{js,jsx,tsx,ts,less,md,json}": [
+      "prettier --write",
+      "git add"
+    ],
+    "**/*.{js,jsx}": "npm run lint-staged:js",
+    "**/*.{js,ts,tsx}": "npm run lint-staged:js"
+  },
+  "license": "MIT"
+}
