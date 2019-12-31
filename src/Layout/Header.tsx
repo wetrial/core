@@ -5,9 +5,9 @@ import React, { Component } from 'react';
 import { Layout } from 'antd';
 import { BasicLayoutProps } from './BasicLayout';
 import GlobalHeader, { GlobalHeaderProps } from './GlobalHeader';
-import { Settings } from '../../defaultSettings';
+import { Settings } from '../kernel/defaultSettings';
 import TopNavHeader from './TopNavHeader';
-import { IWithFalse } from '../../types';
+import { IWithFalse } from '../types';
 
 const { Header } = Layout;
 
@@ -57,13 +57,7 @@ class HeaderView extends Component<HeaderViewProps, HeaderViewState> {
   }
 
   getHeadWidth = () => {
-    const {
-      isMobile,
-      collapsed,
-      fixedHeader,
-      layout,
-      siderWidth = 256,
-    } = this.props;
+    const { isMobile, collapsed, fixedHeader, layout, siderWidth = 256 } = this.props;
     if (isMobile || !fixedHeader || layout === 'topmenu') {
       return '100%';
     }
@@ -76,8 +70,7 @@ class HeaderView extends Component<HeaderViewProps, HeaderViewState> {
     if (!autoHideHeader) {
       return;
     }
-    const scrollTop =
-      document.body.scrollTop + document.documentElement.scrollTop;
+    const scrollTop = document.body.scrollTop + document.documentElement.scrollTop;
     if (!this.ticking) {
       this.ticking = true;
       requestAnimationFrame(() => {
@@ -101,17 +94,9 @@ class HeaderView extends Component<HeaderViewProps, HeaderViewState> {
   };
 
   renderContent = () => {
-    const {
-      isMobile,
-      handleMenuCollapse,
-      navTheme,
-      layout,
-      headerRender,
-    } = this.props;
+    const { isMobile, handleMenuCollapse, navTheme, layout, headerRender } = this.props;
     const isTop = layout === 'topmenu';
-    let defaultDom = (
-      <GlobalHeader onCollapse={handleMenuCollapse} {...this.props} />
-    );
+    let defaultDom = <GlobalHeader onCollapse={handleMenuCollapse} {...this.props} />;
     if (isTop && !isMobile) {
       defaultDom = (
         <TopNavHeader

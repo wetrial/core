@@ -1,10 +1,10 @@
 import H from 'history';
 import { BreadcrumbProps as AntdBreadcrumbProps } from 'antd/es/breadcrumb';
 import React from 'react';
-import pathToRegexp from 'path-to-regexp';
-import { IMenuDataItem, IMessageDescriptor } from '../../../types';
-import { Settings } from '../../../defaultSettings';
-import { urlToList } from '../../../utils';
+import { pathToRegexp } from 'path-to-regexp';
+import { IMenuDataItem, IMessageDescriptor } from '../../types';
+import { Settings } from '../../kernel/defaultSettings';
+import { urlToList } from '../../kernel/utils';
 
 export interface BreadcrumbProps {
   breadcrumbList?: { title: string; href: string }[];
@@ -17,9 +17,7 @@ export interface BreadcrumbProps {
   menu?: Settings['menu'];
   breadcrumb?: { [path: string]: IMenuDataItem };
   formatMessage?: (message: IMessageDescriptor) => string;
-  breadcrumbRender?: (
-    routers: AntdBreadcrumbProps['routes'],
-  ) => AntdBreadcrumbProps['routes'];
+  breadcrumbRender?: (routers: AntdBreadcrumbProps['routes']) => AntdBreadcrumbProps['routes'];
   itemRender?: AntdBreadcrumbProps['itemRender'];
 }
 
@@ -29,10 +27,7 @@ const defaultItemRender: AntdBreadcrumbProps['itemRender'] = route => {
   return <a>{route.breadcrumbName}</a>;
 };
 
-const renderItemLocal = (
-  item: IMenuDataItem,
-  props: BreadcrumbProps,
-): string => {
+const renderItemLocal = (item: IMenuDataItem, props: BreadcrumbProps): string => {
   const {
     formatMessage,
     menu = {
@@ -81,9 +76,7 @@ export const getBreadcrumbFromProps = (
 };
 
 // Generated according to props
-const conversionFromProps = (
-  props: BreadcrumbProps,
-): AntdBreadcrumbProps['routes'] => {
+const conversionFromProps = (props: BreadcrumbProps): AntdBreadcrumbProps['routes'] => {
   const { breadcrumbList = [] } = props;
   return breadcrumbList
     .map(item => {
@@ -137,9 +130,7 @@ export type BreadcrumbListReturn = Pick<
  * 将参数转化为面包屑
  * Convert parameters into breadcrumbs
  */
-export const genBreadcrumbProps = (
-  props: BreadcrumbProps,
-): AntdBreadcrumbProps['routes'] => {
+export const genBreadcrumbProps = (props: BreadcrumbProps): AntdBreadcrumbProps['routes'] => {
   const { breadcrumbList } = props;
   const { location, breadcrumb } = getBreadcrumbFromProps(props);
   if (breadcrumbList && breadcrumbList.length) {
@@ -155,9 +146,7 @@ export const genBreadcrumbProps = (
 };
 
 // use breadcrumbRender to change routes
-export const getBreadcrumbProps = (
-  props: BreadcrumbProps,
-): BreadcrumbListReturn => {
+export const getBreadcrumbProps = (props: BreadcrumbProps): BreadcrumbListReturn => {
   const { breadcrumbRender, itemRender: propsItemRender } = props;
   const routesArray = genBreadcrumbProps(props);
   const itemRender = propsItemRender || defaultItemRender;

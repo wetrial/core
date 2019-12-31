@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import { HeaderViewProps } from './Header';
-import BaseMenu, {
-  SiderMenuProps,
-  defaultRenderLogo,
-} from './SiderMenu/SiderMenu';
+import BaseMenu, { SiderMenuProps, defaultRenderLogo } from './SiderMenu/SiderMenu';
 import { getFlatMenuKeys } from './SiderMenu/SiderMenuUtils';
-import { isBrowser } from '../../utils';
+import { isBrowser } from '../kernel/utils';
 import './TopNavHeader.less';
 
 export interface TopNavHeaderProps extends SiderMenuProps {
@@ -18,20 +15,12 @@ interface TopNavHeaderState {
   maxWidth?: number;
 }
 
-export default class TopNavHeader extends Component<
-  TopNavHeaderProps,
-  TopNavHeaderState
-> {
-  static getDerivedStateFromProps(
-    props: TopNavHeaderProps,
-  ): TopNavHeaderState | null {
+export default class TopNavHeader extends Component<TopNavHeaderProps, TopNavHeaderState> {
+  static getDerivedStateFromProps(props: TopNavHeaderProps): TopNavHeaderState | null {
     const { contentWidth } = props;
     const innerWidth = isBrowser() ? window.innerWidth : 0;
     return {
-      maxWidth:
-        (contentWidth === 'Fixed' && innerWidth > 1200 ? 1200 : innerWidth) -
-        280 -
-        120,
+      maxWidth: (contentWidth === 'Fixed' && innerWidth > 1200 ? 1200 : innerWidth) - 280 - 120,
     };
   }
 
@@ -40,14 +29,7 @@ export default class TopNavHeader extends Component<
   maim: HTMLDivElement | null = null;
 
   render(): React.ReactNode {
-    const {
-      theme,
-      menuData,
-      logo,
-      title,
-      contentWidth,
-      rightContentRender,
-    } = this.props;
+    const { theme, menuData, logo, title, contentWidth, rightContentRender } = this.props;
     const { maxWidth } = this.state;
     const flatMenuKeys = getFlatMenuKeys(menuData);
     const baseClassName = 'ant-pro-top-nav-header';
@@ -57,9 +39,7 @@ export default class TopNavHeader extends Component<
           ref={ref => {
             this.maim = ref;
           }}
-          className={`${baseClassName}-main ${
-            contentWidth === 'Fixed' ? 'wide' : ''
-          }`}
+          className={`${baseClassName}-main ${contentWidth === 'Fixed' ? 'wide' : ''}`}
         >
           <div className={`${baseClassName}-left`}>
             <div className={`${baseClassName}-logo`} key="logo" id="logo">
@@ -69,10 +49,7 @@ export default class TopNavHeader extends Component<
               </a>
             </div>
           </div>
-          <div
-            style={{ maxWidth, flex: 1 }}
-            className={`${baseClassName}-menu`}
-          >
+          <div style={{ maxWidth, flex: 1 }} className={`${baseClassName}-menu`}>
             <BaseMenu {...this.props} flatMenuKeys={flatMenuKeys} />
           </div>
           {rightContentRender &&

@@ -4,11 +4,11 @@ import { Icon, Menu } from 'antd';
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { MenuMode } from 'antd/es/menu';
-import defaultSettings, { Settings } from '../../../defaultSettings';
+import defaultSettings, { Settings } from '../../kernel/defaultSettings';
 import { getMenuMatches } from './SiderMenuUtils';
-import { isUrl, urlToList } from '../../../utils';
+import { isUrl, urlToList } from '../../kernel/utils';
 import { RouterTypes } from 'umi';
-import { IMenuDataItem, IMessageDescriptor, IRoute, IWithFalse } from '../../../types';
+import { IMenuDataItem, IMessageDescriptor, IRoute, IWithFalse } from '../../types';
 
 export interface BaseMenuProps extends Partial<RouterTypes<IRoute>>, Partial<Settings> {
   className?: string;

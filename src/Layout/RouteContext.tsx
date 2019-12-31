@@ -1,7 +1,7 @@
 import { createContext } from 'react';
 import { BreadcrumbListReturn } from './utils/getBreadcrumbProps';
-import { Settings } from '../../defaultSettings';
-import { IMenuDataItem } from '../../types';
+import { Settings } from '../kernel/defaultSettings';
+import { IMenuDataItem } from '../types';
 
 interface RouteContextType extends Partial<Settings> {
   breadcrumb?: BreadcrumbListReturn;

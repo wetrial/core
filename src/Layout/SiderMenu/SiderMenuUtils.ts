@@ -1,7 +1,7 @@
-import pathToRegexp from 'path-to-regexp';
+import { pathToRegexp } from 'path-to-regexp';
 import { BaseMenuProps } from './BaseMenu';
-import { IMenuDataItem } from '../../../types';
-import { urlToList } from '../../../utils';
+import { IMenuDataItem } from '../../types';
+import { urlToList } from '../../kernel/utils';
 
 /**
  * Recursively flatten the data
@@ -22,10 +22,7 @@ export const getFlatMenuKeys = (menuData: IMenuDataItem[] = []): string[] => {
   return keys;
 };
 
-export const getMenuMatches = (
-  flatMenuKeys: string[] = [],
-  path: string,
-): string[] =>
+export const getMenuMatches = (flatMenuKeys: string[] = [], path: string): string[] =>
   flatMenuKeys.filter(item => item && pathToRegexp(item).test(path));
 
 /**

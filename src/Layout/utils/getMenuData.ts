@@ -1,8 +1,8 @@
 import isEqual from 'lodash/isEqual';
 import memoizeOne from 'memoize-one';
-import { IMenuDataItem, IRoute, IMessageDescriptor } from '../../../types';
+import { IMenuDataItem, IRoute, IMessageDescriptor } from '../../types';
 
-import { Settings } from '../../../defaultSettings';
+import { Settings } from '../../kernel/defaultSettings';
 
 interface FormatterProps {
   data: IMenuDataItem[];

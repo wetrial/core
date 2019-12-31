@@ -1,18 +1,14 @@
-import './BasicLayout.less';
-
 import React, { useState } from 'react';
 import { BreadcrumbProps as AntdBreadcrumbProps } from 'antd/es/breadcrumb';
-import { ContainerQuery } from 'react-container-query';
 import DocumentTitle from 'react-document-title';
 import { Layout } from 'antd';
-import classNames from 'classnames';
-import useMedia from 'react-media-hook2';
 import Header, { HeaderViewProps } from './Header';
 import { RouterTypes } from 'umi';
-import { IMenuDataItem, IMessageDescriptor, IRoute, IWithFalse, IDispatch } from '../../types';
+import { useResponsive } from '@wetrial/hooks';
+import { IMenuDataItem, IMessageDescriptor, IRoute, IWithFalse } from '../types';
 import defaultGetPageTitle, { GetPageTitleProps } from './utils/getPageTitle';
-import { Settings } from '../../defaultSettings';
-import getLocales, { localeType } from '../../locales';
+import { Settings } from '../kernel/defaultSettings';
+import getLocales, { localeType } from '../locales';
 import { BaseMenuProps } from './SiderMenu/BaseMenu';
 import Footer from './Footer';
 import RouteContext from './RouteContext';
@@ -21,32 +17,9 @@ import { SiderMenuProps } from './SiderMenu/SiderMenu';
 import { getBreadcrumbProps } from './utils/getBreadcrumbProps';
 import getMenuData from './utils/getMenuData';
 
-const { Content } = Layout;
+import './BasicLayout.less';
 
-const query = {
-  'screen-xs': {
-    maxWidth: 575,
-  },
-  'screen-sm': {
-    minWidth: 576,
-    maxWidth: 767,
-  },
-  'screen-md': {
-    minWidth: 768,
-    maxWidth: 991,
-  },
-  'screen-lg': {
-    minWidth: 992,
-    maxWidth: 1199,
-  },
-  'screen-xl': {
-    minWidth: 1200,
-    maxWidth: 1599,
-  },
-  'screen-xxl': {
-    minWidth: 1600,
-  },
-};
+const { Content } = Layout;
 
 export interface BasicLayoutProps
   extends Partial<RouterTypes<IRoute>>,
@@ -71,7 +44,6 @@ export interface BasicLayoutProps
     [path: string]: IMenuDataItem;
   };
   settings: Settings;
-  dispatch: IDispatch;
 }
 
 const headerRender = (props: BasicLayoutProps): React.ReactNode => {
@@ -150,6 +122,8 @@ const getPaddingLeft = (
 };
 
 const BasicLayout: React.FC<BasicLayoutProps> = props => {
+  const { screen, responsive } = useResponsive();
+
   const {
     children,
     onCollapse,
@@ -197,10 +171,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
   /**
    * init variables
    */
-  const isMobile = useMedia({
-    id: 'BasicLayout',
-    query: '(max-width: 599px)',
-  })[0];
+  const isMobile = responsive.xs || responsive.sm;
 
   // If it is a fix menu, calculate padding
   // don't need padding in phone mode
@@ -233,58 +204,54 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
 
   return (
     <DocumentTitle title={pageTitle}>
-      <ContainerQuery query={query}>
-        {params => (
-          <div className={classNames(params, 'ant-design-pro', 'basicLayout')}>
-            <Layout>
-              {renderSiderMenu({
-                menuData,
-                handleMenuCollapse,
-                isMobile,
-                theme: navTheme,
-                collapsed,
-                ...defaultProps,
-              })}
-              <Layout
-                style={{
-                  paddingLeft: getPaddingLeft(!!hasLeftPadding, collapsed, siderWidth),
-                  minHeight: '100vh',
+      <div className={`screen-${screen} ant-design-pro basicLayout`}>
+        <Layout>
+          {renderSiderMenu({
+            menuData,
+            handleMenuCollapse,
+            isMobile,
+            theme: navTheme,
+            collapsed,
+            ...defaultProps,
+          })}
+          <Layout
+            style={{
+              paddingLeft: getPaddingLeft(!!hasLeftPadding, collapsed, siderWidth),
+              minHeight: '100vh',
+            }}
+          >
+            {headerRender({
+              menuData,
+              handleMenuCollapse,
+              isMobile,
+              collapsed,
+              ...defaultProps,
+            })}
+            <Content
+              className="ant-pro-basicLayout-content"
+              style={!fixedHeader ? { paddingTop: 0 } : {}}
+            >
+              <RouteContext.Provider
+                value={{
+                  breadcrumb: breadcrumbProps,
+                  ...props,
+                  menuData,
+                  isMobile,
+                  collapsed,
+                  title: pageTitle.split('-')[0].trim(),
                 }}
               >
-                {headerRender({
-                  menuData,
-                  handleMenuCollapse,
-                  isMobile,
-                  collapsed,
-                  ...defaultProps,
-                })}
-                <Content
-                  className="ant-pro-basicLayout-content"
-                  style={!fixedHeader ? { paddingTop: 0 } : {}}
-                >
-                  <RouteContext.Provider
-                    value={{
-                      breadcrumb: breadcrumbProps,
-                      ...props,
-                      menuData,
-                      isMobile,
-                      collapsed,
-                      title: pageTitle.split('-')[0].trim(),
-                    }}
-                  >
-                    {children}
-                  </RouteContext.Provider>
-                </Content>
-                {footerRender({
-                  isMobile,
-                  collapsed,
-                  ...defaultProps,
-                })}
-              </Layout>
-            </Layout>
-          </div>
-        )}
-      </ContainerQuery>
+                {children}
+              </RouteContext.Provider>
+            </Content>
+            {footerRender({
+              isMobile,
+              collapsed,
+              ...defaultProps,
+            })}
+          </Layout>
+        </Layout>
+      </div>
     </DocumentTitle>
   );
 };

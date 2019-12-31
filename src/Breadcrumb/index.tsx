@@ -2,8 +2,8 @@ import { Location } from 'history';
 
 import React, { PureComponent, createElement } from 'react';
 import { Breadcrumb } from 'antd';
-import pathToRegexp from 'path-to-regexp';
-import { urlToList } from '../../utils';
+import { pathToRegexp } from 'path-to-regexp';
+import { urlToList } from '../kernel/utils';
 import './index.less';
 
 export interface BreadcrumbProps {

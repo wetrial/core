@@ -1,15 +1,13 @@
-import pathToRegexp from 'path-to-regexp';
-import { IMenuDataItem } from '../../../types';
-import { Settings } from '../../../defaultSettings';
+import { pathToRegexp } from 'path-to-regexp';
+import { IMenuDataItem } from '../../types';
+import { Settings } from '../../kernel/defaultSettings';
 
 export const matchParamsPath = (
   pathname: string,
   breadcrumb?: { [path: string]: IMenuDataItem },
 ): IMenuDataItem => {
   if (breadcrumb) {
-    const pathKey = Object.keys(breadcrumb).find(key =>
-      pathToRegexp(key).test(pathname),
-    );
+    const pathKey = Object.keys(breadcrumb).find(key => pathToRegexp(key).test(pathname));
     if (pathKey) {
       return breadcrumb[pathKey];
     }

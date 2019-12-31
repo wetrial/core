@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Icon } from 'antd';
 import debounce from 'lodash/debounce';
-import { isBrowser } from '../../utils';
+import { isBrowser } from '../kernel/utils';
 import { HeaderViewProps } from './Header';
 import { defaultRenderLogo } from './SiderMenu/SiderMenu';
-import { IWithFalse } from '../../types';
+import { IWithFalse } from '../types';
 
 import './GlobalHeader.less';
 

@@ -33,7 +33,7 @@ const options: IBundleOptions = {
   esm: 'babel',
   cjs: 'babel',
   umd: {
-    name: 'wetrialHooks',
+    name: 'wetrial-core',
     globals: {
       react: 'React',
     },
