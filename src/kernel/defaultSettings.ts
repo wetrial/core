@@ -1,6 +1,6 @@
 export type ContentWidth = 'Fluid' | 'Fixed';
 
-export interface Settings {
+export interface ISettings {
   /**
    * theme for nav menu
    */
@@ -35,7 +35,8 @@ export interface Settings {
   iconfontUrl: string;
 }
 
-const defaultSettings: Settings = {
+// eslint-disable-next-line import/no-mutable-exports
+let defaultSettings: ISettings = {
   navTheme: 'light',
   layout: 'sidemenu',
   contentWidth: 'Fluid',
@@ -49,4 +50,9 @@ const defaultSettings: Settings = {
   title: 'Wetrial',
   iconfontUrl: '',
 };
+
+export function configDefaultSetting(setting: ISettings) {
+  defaultSettings = setting;
+}
+
 export default defaultSettings;
