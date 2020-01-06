@@ -2,11 +2,11 @@ import isEqual from 'lodash/isEqual';
 import memoizeOne from 'memoize-one';
 import { IMenuDataItem, IRoute, IMessageDescriptor } from '../../types';
 
-import { Settings } from '../../kernel/defaultSettings';
+import { ISettings } from '../../kernel/defaultSettings';
 
 interface FormatterProps {
   data: IMenuDataItem[];
-  menu: Settings['menu'];
+  menu: ISettings['menu'];
   formatMessage?: (data: { id: string; defaultMessage?: string }) => string;
   parentName?: string;
   authority?: string[] | string;

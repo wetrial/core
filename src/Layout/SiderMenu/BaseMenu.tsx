@@ -4,13 +4,13 @@ import { Icon, Menu } from 'antd';
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { MenuMode } from 'antd/es/menu';
-import defaultSettings, { Settings } from '../../kernel/defaultSettings';
+import defaultSettings, { ISettings } from '../../kernel/defaultSettings';
 import { getMenuMatches } from './SiderMenuUtils';
 import { isUrl, urlToList } from '../../kernel/utils';
 import { RouterTypes } from 'umi';
 import { IMenuDataItem, IMessageDescriptor, IRoute, IWithFalse } from '../../types';
 
-export interface BaseMenuProps extends Partial<RouterTypes<IRoute>>, Partial<Settings> {
+export interface BaseMenuProps extends Partial<RouterTypes<IRoute>>, Partial<ISettings> {
   className?: string;
   collapsed?: boolean;
   flatMenuKeys?: string[];

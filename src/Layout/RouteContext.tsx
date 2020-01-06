@@ -1,9 +1,9 @@
 import { createContext } from 'react';
 import { BreadcrumbListReturn } from './utils/getBreadcrumbProps';
-import { Settings } from '../kernel/defaultSettings';
+import { ISettings } from '../kernel/defaultSettings';
 import { IMenuDataItem } from '../types';
 
-interface RouteContextType extends Partial<Settings> {
+interface RouteContextType extends Partial<ISettings> {
   breadcrumb?: BreadcrumbListReturn;
   menuData?: IMenuDataItem[];
   isMobile?: boolean;

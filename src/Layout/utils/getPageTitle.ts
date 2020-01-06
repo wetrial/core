@@ -1,6 +1,6 @@
 import { pathToRegexp } from 'path-to-regexp';
 import { IMenuDataItem } from '../../types';
-import { Settings } from '../../kernel/defaultSettings';
+import { ISettings } from '../../kernel/defaultSettings';
 
 export const matchParamsPath = (
   pathname: string,
@@ -20,8 +20,8 @@ export const matchParamsPath = (
 export interface GetPageTitleProps {
   pathname?: string;
   breadcrumb?: { [path: string]: IMenuDataItem };
-  menu?: Settings['menu'];
-  title?: Settings['title'];
+  menu?: ISettings['menu'];
+  title?: ISettings['title'];
   formatMessage: (data: { id: any; defaultMessage?: string }) => string;
 }
 

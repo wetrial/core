@@ -7,7 +7,7 @@ import { RouterTypes } from 'umi';
 import { useResponsive } from '@wetrial/hooks';
 import { IMenuDataItem, IMessageDescriptor, IRoute, IWithFalse } from '../types';
 import defaultGetPageTitle, { GetPageTitleProps } from './utils/getPageTitle';
-import { Settings } from '../kernel/defaultSettings';
+import { ISettings } from '../kernel/defaultSettings';
 import getLocales, { localeType } from '../locales';
 import { BaseMenuProps } from './SiderMenu/BaseMenu';
 import Footer from './Footer';
@@ -25,7 +25,7 @@ export interface BasicLayoutProps
   extends Partial<RouterTypes<IRoute>>,
     SiderMenuProps,
     HeaderViewProps,
-    Partial<Settings> {
+    Partial<ISettings> {
   logo?: React.ReactNode | IWithFalse<() => React.ReactNode>;
   locale?: localeType;
   onCollapse?: (collapsed: boolean) => void;
@@ -43,7 +43,7 @@ export interface BasicLayoutProps
   breadcrumbNameMap: {
     [path: string]: IMenuDataItem;
   };
-  settings: Settings;
+  settings: ISettings;
 }
 
 const headerRender = (props: BasicLayoutProps): React.ReactNode => {
@@ -122,7 +122,7 @@ const getPaddingLeft = (
 };
 
 const BasicLayout: React.FC<BasicLayoutProps> = props => {
-  const { screen, responsive } = useResponsive();
+  const { screen } = useResponsive();
 
   const {
     children,
@@ -171,7 +171,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
   /**
    * init variables
    */
-  const isMobile = responsive.xs || responsive.sm;
+  const isMobile = screen === 'xs' || screen === 'sm';
 
   // If it is a fix menu, calculate padding
   // don't need padding in phone mode

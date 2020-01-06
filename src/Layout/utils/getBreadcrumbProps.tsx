@@ -3,7 +3,7 @@ import { BreadcrumbProps as AntdBreadcrumbProps } from 'antd/es/breadcrumb';
 import React from 'react';
 import { pathToRegexp } from 'path-to-regexp';
 import { IMenuDataItem, IMessageDescriptor } from '../../types';
-import { Settings } from '../../kernel/defaultSettings';
+import { ISettings } from '../../kernel/defaultSettings';
 import { urlToList } from '../../kernel/utils';
 
 export interface BreadcrumbProps {
@@ -14,7 +14,7 @@ export interface BreadcrumbProps {
     | {
         pathname?: string;
       };
-  menu?: Settings['menu'];
+  menu?: ISettings['menu'];
   breadcrumb?: { [path: string]: IMenuDataItem };
   formatMessage?: (message: IMessageDescriptor) => string;
   breadcrumbRender?: (routers: AntdBreadcrumbProps['routes']) => AntdBreadcrumbProps['routes'];

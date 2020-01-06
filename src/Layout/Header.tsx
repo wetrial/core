@@ -5,13 +5,13 @@ import React, { Component } from 'react';
 import { Layout } from 'antd';
 import { BasicLayoutProps } from './BasicLayout';
 import GlobalHeader, { GlobalHeaderProps } from './GlobalHeader';
-import { Settings } from '../kernel/defaultSettings';
+import { ISettings } from '../kernel/defaultSettings';
 import TopNavHeader from './TopNavHeader';
 import { IWithFalse } from '../types';
 
 const { Header } = Layout;
 
-export interface HeaderViewProps extends Partial<Settings>, GlobalHeaderProps {
+export interface HeaderViewProps extends Partial<ISettings>, GlobalHeaderProps {
   isMobile?: boolean;
   collapsed?: boolean;
   logo?: React.ReactNode;
