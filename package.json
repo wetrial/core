@@ -1,6 +1,6 @@
 {
   "name": "@wetrial/core",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "react component library",
   "keywords": [
     "antd components",
@@ -68,12 +68,6 @@
     "react": "^16.8.6"
   },
   "devDependencies": {
-    "@wetrial/hooks": "^0.10.12",
-    "antd": "^3.20.1",
-    "axios": "^0.19.0",
-    "lodash": "^4.17.15",
-    "lodash-decorators": "^6.0.1",
-    "react": "^16.8.6",
     "@testing-library/react-hooks": "^2.0.1",
     "@types/classnames": "^2.2.9",
     "@types/jest": "^24.0.15",
@@ -82,6 +76,9 @@
     "@types/react-custom-scrollbars": "^4.0.6",
     "@types/react-document-title": "^2.0.3",
     "@umijs/fabric": "^1.2.12",
+    "@wetrial/hooks": "^0.10.12",
+    "antd": "^3.20.1",
+    "axios": "^0.19.0",
     "babel-plugin-import": "^1.12.0",
     "cross-env": "^6.0.3",
     "del": "^5.1.0",
@@ -91,8 +88,11 @@
     "husky": "^3.1.0",
     "jackbox": "^0.2.0",
     "lint-staged": "^9.5.0",
+    "lodash": "^4.17.15",
+    "lodash-decorators": "^6.0.1",
     "now": "^16.7.0",
     "raw-loader": "^3.1.0",
+    "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-drag-listview": "^0.1.6",
     "resize-observer-polyfill": "^1.5.1",
