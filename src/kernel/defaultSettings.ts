@@ -51,8 +51,15 @@ let defaultSettings: ISettings = {
   iconfontUrl: '',
 };
 
-export function configDefaultSetting(setting: ISettings) {
-  defaultSettings = setting;
+export function configDefaultSetting(setting: Partial<ISettings>) {
+  defaultSettings = {
+    ...defaultSettings,
+    ...setting,
+    menu: {
+      ...defaultSettings.menu,
+      ...setting.menu,
+    },
+  };
 }
 
 export default defaultSettings;

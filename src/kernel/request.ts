@@ -11,7 +11,8 @@ export interface IRequestOption extends AxiosRequestConfig {
   method?: 'post' | 'get' | 'put' | 'delete' | 'patch';
 }
 
-const instance = axios.create({
+// eslint-disable-next-line
+let instance = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
@@ -119,4 +120,34 @@ export async function del<TResult = any>(opt: IRequestOption) {
   });
 }
 
-export { instance, commonRequestInterceptor, commonResponseInterceptor };
+function useRequestInterceptor(
+  onFulfilled?: (value: any) => any | Promise<any>,
+  onRejected?: (error: any) => any,
+) {
+  return instance.interceptors.request.use(onFulfilled, onRejected);
+}
+
+function ejectRequestInterceptor(interceptorId: number) {
+  return instance.interceptors.request.eject(interceptorId);
+}
+
+function useResponseInterceptor(
+  onFulfilled?: (value: any) => any | Promise<any>,
+  onRejected?: (error: any) => any,
+) {
+  return instance.interceptors.response.use(onFulfilled, onRejected);
+}
+
+function ejectResponseInterceptor(interceptorId: number) {
+  return instance.interceptors.response.eject(interceptorId);
+}
+
+export {
+  instance,
+  commonRequestInterceptor,
+  commonResponseInterceptor,
+  useRequestInterceptor,
+  ejectRequestInterceptor,
+  useResponseInterceptor,
+  ejectResponseInterceptor,
+};
