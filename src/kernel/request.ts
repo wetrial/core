@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 
 import { omit, assign } from 'lodash';
 import { message } from 'antd';
-import { getToken } from './store';
+import { getToken } from './authority';
 import { UnAuthorizedException, UserFriendlyException } from './exception';
 
 export interface IRequestOption extends AxiosRequestConfig {

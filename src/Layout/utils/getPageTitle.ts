@@ -1,4 +1,4 @@
-import { pathToRegexp } from 'path-to-regexp';
+import pathToRegexp from 'path-to-regexp';
 import { IMenuDataItem } from '../../types';
 import { ISettings } from '../../kernel/defaultSettings';
 
@@ -7,6 +7,7 @@ export const matchParamsPath = (
   breadcrumb?: { [path: string]: IMenuDataItem },
 ): IMenuDataItem => {
   if (breadcrumb) {
+    // @ts-ignore
     const pathKey = Object.keys(breadcrumb).find(key => pathToRegexp(key).test(pathname));
     if (pathKey) {
       return breadcrumb[pathKey];

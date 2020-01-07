@@ -1,7 +1,7 @@
 import H from 'history';
 import { BreadcrumbProps as AntdBreadcrumbProps } from 'antd/es/breadcrumb';
 import React from 'react';
-import { pathToRegexp } from 'path-to-regexp';
+import pathToRegexp from 'path-to-regexp';
 import { IMenuDataItem, IMessageDescriptor } from '../../types';
 import { ISettings } from '../../kernel/defaultSettings';
 import { urlToList } from '../../kernel/utils';
@@ -54,6 +54,7 @@ export const getBreadcrumb = (
   let breadcrumbItem = breadcrumb[url];
   if (!breadcrumbItem) {
     Object.keys(breadcrumb).forEach(item => {
+      // @ts-ignore
       if (pathToRegexp(item).test(url)) {
         breadcrumbItem = breadcrumb[item];
       }

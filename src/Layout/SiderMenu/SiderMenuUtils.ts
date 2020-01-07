@@ -1,4 +1,4 @@
-import { pathToRegexp } from 'path-to-regexp';
+import pathToRegexp from 'path-to-regexp';
 import { BaseMenuProps } from './BaseMenu';
 import { IMenuDataItem } from '../../types';
 import { urlToList } from '../../kernel/utils';
@@ -23,6 +23,7 @@ export const getFlatMenuKeys = (menuData: IMenuDataItem[] = []): string[] => {
 };
 
 export const getMenuMatches = (flatMenuKeys: string[] = [], path: string): string[] =>
+  // @ts-ignore
   flatMenuKeys.filter(item => item && pathToRegexp(item).test(path));
 
 /**

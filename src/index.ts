@@ -1,4 +1,4 @@
-export { default as Authorized } from './Authorized';
+export { default as Authorized, reloadAuthorized } from './Authorized';
 
 export { default as AvatarList } from './AvatarList';
 
@@ -30,5 +30,7 @@ export {
   ISettings,
 } from './kernel/defaultSettings';
 export * from './kernel/request';
-export * from './kernel/store';
+export { default as store } from './kernel/store';
 export * from './kernel/validation';
+export * from './kernel/authority';
+export { default as extendModel } from './kernel/model';

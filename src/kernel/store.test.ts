@@ -1,4 +1,4 @@
-import { setToken, getToken, clearToken, setPermissions, getPermissions } from './store';
+import { setToken, getToken, clearToken, setPermissions, getPermissions } from './authority';
 
 describe('store', () => {
   describe('setToken && getToken && clearToken', () => {
