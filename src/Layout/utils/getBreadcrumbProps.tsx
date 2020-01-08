@@ -54,7 +54,6 @@ export const getBreadcrumb = (
   let breadcrumbItem = breadcrumb[url];
   if (!breadcrumbItem) {
     Object.keys(breadcrumb).forEach(item => {
-      // @ts-ignore
       if (pathToRegexp(item).test(url)) {
         breadcrumbItem = breadcrumb[item];
       }

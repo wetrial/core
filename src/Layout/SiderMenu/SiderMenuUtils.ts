@@ -23,7 +23,6 @@ export const getFlatMenuKeys = (menuData: IMenuDataItem[] = []): string[] => {
 };
 
 export const getMenuMatches = (flatMenuKeys: string[] = [], path: string): string[] =>
-  // @ts-ignore
   flatMenuKeys.filter(item => item && pathToRegexp(item).test(path));
 
 /**
