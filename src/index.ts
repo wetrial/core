@@ -12,8 +12,6 @@ export { default as FooterToolbar } from './FooterToolbar';
 
 export { default as GlobalFooter } from './GlobalFooter';
 
-export { default as CombineElement } from './CombineElement';
-
 export { default as NormalLayout } from './Layout';
 
 export { default as Result } from './Result';
