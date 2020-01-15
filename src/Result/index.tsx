@@ -4,7 +4,7 @@ import { Icon } from 'antd';
 import './index.less';
 
 export interface IResultProp {
-  className: string;
+  className?: string;
   type: 'success' | 'error';
   title: React.ReactNode;
   description: React.ReactNode;
@@ -23,7 +23,7 @@ const Result: React.FC<IResultProp> = props => {
   const clsString = classNames(className, 'result');
 
   return (
-    <div className={clsString} {...restProps}>
+    <div className={clsString} {...restProps} style={{ width: '100%' }}>
       <div className="icon">{iconMap[type]}</div>
       <div className="title">{title}</div>
       {description && <div className="description">{description}</div>}
