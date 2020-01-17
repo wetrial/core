@@ -1,9 +1,9 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { omit } from 'lodash';
 import { Select } from 'antd';
 import { SelectProps } from 'antd/es/select';
 
-export interface IEnumSelectProps<T> extends SelectProps {
+export interface IEnumSelectProps<T, VT = string> extends SelectProps<VT> {
   /**
    * 数据源列表
    */
@@ -18,35 +18,17 @@ export interface IEnumSelectProps<T> extends SelectProps {
   label?: keyof { [key: string]: T }; // keyof T
 }
 
-export default class<T> extends PureComponent<IEnumSelectProps<T>> {
-  // static defaultProps = {
-  //   list: [],
-  //   keyName: 'key',
-  //   label: 'label',
-  // };
+export default function<T>(props: IEnumSelectProps<T>) {
+  const { list = [], keyName = 'key', label = 'label' } = props;
 
-  render() {
-    const { onChange, list = [], keyName = 'key', label = 'label' } = this.props;
-    const handleChange = value => {
-      if (onChange) {
-        // @ts-ignore
-        onChange(value);
-      }
-    };
-    const selectProps = omit(this.props, 'keyName', 'label', 'list', 'onChange');
-    return (
-      <Select
-        optionFilterProp="children"
-        placeholder="-- 请选择 --"
-        {...selectProps}
-        onChange={handleChange}
-      >
-        {list.map(item => (
-          <Select.Option key={`${item[keyName]}`} value={item[keyName]}>
-            {item[label]}
-          </Select.Option>
-        ))}
-      </Select>
-    );
-  }
+  const selectProps = omit(props, 'keyName', 'label', 'list');
+  return (
+    <Select optionFilterProp="children" placeholder="-- 请选择 --" {...selectProps}>
+      {list.map(item => (
+        <Select.Option key={`${item[keyName]}`} value={item[keyName]}>
+          {item[label]}
+        </Select.Option>
+      ))}
+    </Select>
+  );
 }

@@ -10,17 +10,9 @@ export { default as Exception } from './Exception';
 
 export { default as FooterToolbar } from './FooterToolbar';
 
-export { default as GlobalFooter } from './GlobalFooter';
-
-export { default as NormalLayout } from './Layout';
-
-export { default as Result } from './Result';
-
 export { default as ScrollBar } from './ScrollBar';
 
 export { default as SelectPlus } from './SelectPlus';
-
-export { default as TagSelect } from './TagSelect';
 
 export {
   default as defaultSettings,
