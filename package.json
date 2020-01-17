@@ -1,6 +1,6 @@
 {
   "name": "@wetrial/core",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "react component library",
   "keywords": [
     "antd components",
@@ -51,6 +51,7 @@
     "package.json"
   ],
   "dependencies": {
+    "axios": "^0.19.0",
     "classnames": "^2.2.6",
     "dva": "^2.4.1",
     "dva-model-extend": "^0.1.2",
@@ -58,8 +59,7 @@
     "path-to-regexp": "^6.1.0",
     "react-custom-scrollbars": "^4.2.1",
     "react-document-title": "^2.0.3",
-    "store": "^2.0.12",
-    "axios": "^0.19.0"
+    "store": "^2.0.12"
   },
   "peerDependencies": {
     "@ant-design/icons": "4.x",
@@ -70,6 +70,7 @@
     "react": "^16.8.6"
   },
   "devDependencies": {
+    "@ant-design/icons": "^4.0.0-alpha.19",
     "@testing-library/react-hooks": "^2.0.1",
     "@types/classnames": "^2.2.9",
     "@types/jest": "^24.0.15",
@@ -79,7 +80,6 @@
     "@wetrial/fabric": "^0.0.4",
     "@wetrial/hooks": "^0.10.12",
     "antd": "^4.0.0-rc.1",
-    "@ant-design/icons": "^4.0.0-alpha.19",
     "babel-plugin-import": "^1.12.0",
     "cross-env": "^6.0.3",
     "del": "^5.1.0",
