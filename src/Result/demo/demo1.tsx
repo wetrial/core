@@ -1,12 +1,5 @@
----
-order: 1
-title: Classic
----
-
-典型结果页面。
-
-```` tsx
-import {Result} from 'wetrial';
+import React from 'react';
+import Result from '..';
 import { Button, Row, Col, Icon, Steps } from 'antd';
 
 const { Step } = Steps;
@@ -27,7 +20,9 @@ const desc2 = (
       周毛毛
       <Icon type="dingding" style={{ color: '#00A0E9', marginLeft: 8 }} />
     </div>
-    <div style={{ marginTop: 8, marginBottom: 4 }}><a href="">催一下</a></div>
+    <div style={{ marginTop: 8, marginBottom: 4 }}>
+      <a href="">催一下</a>
+    </div>
   </div>
 );
 
@@ -67,14 +62,16 @@ const actions = (
   </div>
 );
 
-ReactDOM.render(
-  <Result
-    type="success"
-    title="提交成功"
-    description="提交结果页用于反馈一系列操作任务的处理结果，如果仅是简单操作，使用 Message 全局提示反馈即可。本文字区域可以展示简单的补充说明，如果有类似展示“单据”的需求，下面这个灰色区域可以呈现比较复杂的内容。"
-    extra={extra}
-    actions={actions}
-    style={{ width: '100%' }}
-  />
-, mountNode);
-````
+export default () => {
+  return (
+    <>
+      <Result
+        type="success"
+        title="提交成功"
+        description="提交结果页用于反馈一系列操作任务的处理结果，如果仅是简单操作，使用 Message 全局提示反馈即可。本文字区域可以展示简单的补充说明，如果有类似展示“单据”的需求，下面这个灰色区域可以呈现比较复杂的内容。"
+        extra={extra}
+        actions={actions}
+      />
+    </>
+  );
+};
