@@ -120,7 +120,7 @@ export async function del<TResult = any>(opt: IRequestOption) {
   });
 }
 
-function useRequestInterceptor(
+function addRequestInterceptor(
   onFulfilled?: (value: any) => any | Promise<any>,
   onRejected?: (error: any) => any,
 ) {
@@ -131,7 +131,7 @@ function ejectRequestInterceptor(interceptorId: number) {
   return instance.interceptors.request.eject(interceptorId);
 }
 
-function useResponseInterceptor(
+function addResponseInterceptor(
   onFulfilled?: (value: any) => any | Promise<any>,
   onRejected?: (error: any) => any,
 ) {
@@ -146,8 +146,8 @@ export {
   instance,
   commonRequestInterceptor,
   commonResponseInterceptor,
-  useRequestInterceptor,
+  addRequestInterceptor,
   ejectRequestInterceptor,
-  useResponseInterceptor,
+  addResponseInterceptor,
   ejectResponseInterceptor,
 };

@@ -24,3 +24,40 @@ export { default as store } from './kernel/store';
 export * from './kernel/validation';
 export * from './kernel/authority';
 export { default as extendModel } from './kernel/model';
+
+export {
+  useAPI,
+  useAsync,
+  useLoadMore,
+  useSearch,
+  useControlledValue,
+  useControllableValue,
+  useDynamicList,
+  useVirtualList,
+  useEventEmitter,
+  useLocalStorageState,
+  useSessionStorageState,
+  useSize,
+  configRequest,
+  useUpdateEffect,
+  useUpdateLayoutEffect,
+  usePagination,
+  useBoolean,
+  useToggle,
+  useSelections,
+  useThrottle,
+  useThrottleFn,
+  useDebounce,
+  useDebounceFn,
+  usePrevious,
+  useMouse,
+  useScroll,
+  useClickAway,
+  useFullscreen,
+  useInViewport,
+  useKeyPress,
+  useEventListener,
+  useHover,
+} from '@umijs/hooks';
+
+export * from './hooks';
