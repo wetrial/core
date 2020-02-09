@@ -1,6 +1,6 @@
 {
   "name": "@wetrial/core",
-  "version": "0.0.6",
+  "version": "1.0.0",
   "description": "react component library",
   "keywords": [
     "antd components",
@@ -58,10 +58,10 @@
     "dva-model-extend": "^0.1.2",
     "history": "^4.10.1",
     "path-to-regexp": "^6.1.0",
+    "pubsub-js": "^1.8.0",
     "react-custom-scrollbars": "^4.2.1",
     "react-document-title": "^2.0.3",
-    "store": "^2.0.12",
-    "pubsub-js": "^1.8.0"
+    "store": "^2.0.12"
   },
   "peerDependencies": {
     "@ant-design/icons": "4.x",
@@ -73,10 +73,10 @@
   "devDependencies": {
     "@ant-design/icons": "^4.0.0-alpha.19",
     "@testing-library/react-hooks": "^2.0.1",
-    "@types/pubsub-js": "^1.5.18",
     "@types/classnames": "^2.2.9",
     "@types/jest": "^24.0.15",
     "@types/lodash": "^4.14.149",
+    "@types/pubsub-js": "^1.5.18",
     "@types/react-custom-scrollbars": "^4.0.6",
     "@types/react-document-title": "^2.0.3",
     "@wetrial/fabric": "^0.0.4",
