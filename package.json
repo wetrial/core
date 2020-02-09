@@ -1,6 +1,6 @@
 {
   "name": "@wetrial/core",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "react component library",
   "keywords": [
     "antd components",
@@ -64,17 +64,15 @@
   },
   "peerDependencies": {
     "@ant-design/icons": "4.x",
-    "antd": "4.x",
     "@umijs/hooks": "*",
     "@umijs/use-request": "*",
+    "antd": "4.x",
     "lodash": "^4.17.15",
     "lodash-decorators": "^6.0.1",
     "react": "^16.8.6"
   },
   "devDependencies": {
     "@ant-design/icons": "^4.0.0-alpha.19",
-    "@umijs/hooks": "^1.5.4",
-    "@umijs/use-request": "^1.1.0",
     "@testing-library/react-hooks": "^2.0.1",
     "@types/classnames": "^2.2.9",
     "@types/jest": "^24.0.15",
@@ -82,6 +80,8 @@
     "@types/pubsub-js": "^1.5.18",
     "@types/react-custom-scrollbars": "^4.0.6",
     "@types/react-document-title": "^2.0.3",
+    "@umijs/hooks": "^1.5.4",
+    "@umijs/use-request": "^1.1.0",
     "@wetrial/fabric": "^0.0.4",
     "antd": "^4.0.0-rc.4",
     "babel-plugin-import": "^1.12.0",
