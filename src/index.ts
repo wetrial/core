@@ -24,5 +24,4 @@ export { default as store } from './kernel/store';
 export * from './kernel/validation';
 export * from './kernel/authority';
 export { default as extendModel } from './kernel/model';
-
 export * from './hooks';
