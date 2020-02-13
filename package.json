@@ -23,13 +23,12 @@
     "dev": "cross-env LAN=zh-CN father doc dev",
     "dev:en-us": "father doc dev",
     "js": "node ./.ts2js.js",
-    "build": "node ./scripts/clean-old-build.js && father build && tsc --declarationDir ./es --noImplicitAny false && node ./scripts/build-wind-up.js",
+    "build": "node ./scripts/clean-old-build.js && father build && tsc --declarationDir ./es --noImplicitAny false && node ./scripts/build-wind-up.js && cp package.json ./es && cp README.md ./es",
     "test": "father test",
     "cov": "father test --coverage",
     "help": "father help",
     "precommit": "father pre-commit",
     "build:doc": "father doc build &&cross-env LAN=zh-CN father doc build",
-    "publish:build": "node ./scripts/clean-old-build.js && father build && tsc --declarationDir ./es --noImplicitAny false && node ./scripts/build-wind-up.js && cp -r ./es/* . && rm -rf ./es",
     "pub:doc": "now --prod",
     "patch": "yarn version --patch && git push origin master && git push origin --tags",
     "minor": "yarn version --minor && git push origin master && git push origin --tags",
@@ -43,11 +42,6 @@
     "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
     "prettier": "prettier -c --write \"**/*\""
   },
-  "files": [
-    "README.md",
-    "LICENSE",
-    "package.json"
-  ],
   "dependencies": {
     "axios": "^0.19.2",
     "dva-model-extend": "^0.1.2",
@@ -75,9 +69,9 @@
     "dva": "2.6.0-beta.16",
     "enzyme": "^3.10.0",
     "father": "^2.13.3",
-    "husky": "^3.1.0",
+    "husky": "^4.2.3",
     "jackbox": "^0.2.0",
-    "lint-staged": "^9.5.0",
+    "lint-staged": "^10.0.7",
     "now": "^16.7.0",
     "path-to-regexp": "^6.1.0",
     "prettier": "^1.19.1",
