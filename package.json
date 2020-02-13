@@ -23,7 +23,7 @@
     "dev": "cross-env LAN=zh-CN father doc dev",
     "dev:en-us": "father doc dev",
     "js": "node ./.ts2js.js",
-    "build": "node ./scripts/clean-old-build.js && father build && tsc --declarationDir ./lib  --noImplicitAny false && tsc --declarationDir ./es --noImplicitAny false && node ./scripts/build-wind-up.js",
+    "build": "node ./scripts/clean-old-build.js && father build && tsc --declarationDir ./lib --noImplicitAny false && tsc --declarationDir ./es --noImplicitAny false && node ./scripts/build-wind-up.js",
     "test": "father test",
     "cov": "father test --coverage",
     "help": "father help",

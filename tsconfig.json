@@ -6,6 +6,7 @@
     "sourceMap": true,
     "baseUrl": ".",
     "jsx": "react",
+    "rootDirs": ["src"],
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
     "forceConsistentCasingInFileNames": true,
@@ -17,8 +18,8 @@
     "experimentalDecorators": true,
     "strict": true,
     "declaration": true,
+    "emitDeclarationOnly": true,
     "noImplicitAny": false
   },
-  "include": ["src/**/*", "typings.d.ts"],
   "exclude": ["node_modules", "lib", "es", "dist", "**/__tests__", "**/__test__", "**/demo"]
 }
