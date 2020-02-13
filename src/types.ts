@@ -1,3 +1,5 @@
+export type IWithFalse<T> = T | false;
+
 /**
  * Key value简写
  */

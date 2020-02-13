@@ -37,7 +37,7 @@
     "lint-staged": "lint-staged",
     "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx ",
     "lint:fix": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src && yarn lint:style",
-    "lint:js": "eslint --debug --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./",
+    "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./",
     "lint:prettier": "check-prettier lint",
     "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
     "prettier": "prettier -c --write \"**/*\""
@@ -52,36 +52,23 @@
   ],
   "dependencies": {
     "axios": "^0.19.2",
-    "classnames": "^2.2.6",
-    "dva": "^2.4.1",
     "dva-model-extend": "^0.1.2",
-    "history": "^4.10.1",
-    "path-to-regexp": "^6.1.0",
-    "pubsub-js": "^1.8.0",
-    "react-custom-scrollbars": "^4.2.1",
-    "react-document-title": "^2.0.3",
     "store": "^2.0.12"
   },
   "peerDependencies": {
-    "@ant-design/icons": "4.x",
-    "@umijs/hooks": "*",
-    "antd": "4.x",
-    "lodash": "^4.17.15",
-    "lodash-decorators": "^6.0.1",
-    "react": "^16.8.6"
+    "dva":"2.x*",
+    "react": "^16.8.6",
+    "path-to-regexp": "6.x",
+    "@ant-design/icons": "^4.x",
+    "antd": "^4.x"
   },
   "devDependencies": {
     "@ant-design/icons": "^4.0.0-alpha.19",
-    "@testing-library/react-hooks": "^2.0.1",
-    "@types/classnames": "^2.2.9",
-    "@types/jest": "^24.0.15",
-    "@types/lodash": "^4.14.149",
-    "@types/pubsub-js": "^1.5.18",
-    "@types/react-custom-scrollbars": "^4.0.6",
-    "@types/react-document-title": "^2.0.3",
-    "@umijs/hooks": "^1.6.0",
-    "@wetrial/fabric": "^0.0.4",
     "antd": "^4.0.0-rc.4",
+    "dva": "^2.6.0-beta.16",
+    "path-to-regexp": "^6.1.0",
+    "@types/jest": "^24.0.15",
+    "@umijs/fabric": "^2.0.2",
     "babel-plugin-import": "^1.12.0",
     "cross-env": "^6.0.3",
     "del": "^5.1.0",
@@ -91,8 +78,6 @@
     "husky": "^3.1.0",
     "jackbox": "^0.2.0",
     "lint-staged": "^9.5.0",
-    "lodash": "^4.17.15",
-    "lodash-decorators": "^6.0.1",
     "now": "^16.7.0",
     "raw-loader": "^3.1.0",
     "react": "^16.8.6",
@@ -100,11 +85,13 @@
     "react-drag-listview": "^0.1.6",
     "resize-observer-polyfill": "^1.5.1",
     "sylvanas": "^0.4.2",
+    "prettier": "^1.19.1",
+    "check-prettier": "^1.0.3",
     "typescript": "^3.7.5",
     "umi": "^2.13.3"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=10.0.0"
   },
   "husky": {
     "hooks": {
@@ -113,12 +100,14 @@
   },
   "lint-staged": {
     "**/*.less": "stylelint --syntax less",
+    "**/*.{js,jsx,ts,tsx}": "npm run lint-staged:js",
     "**/*.{js,jsx,tsx,ts,less,md,json}": [
-      "prettier --write",
-      "git add"
-    ],
-    "**/*.{js,jsx}": "npm run lint-staged:js",
-    "**/*.{js,ts,tsx}": "npm run lint-staged:js"
+      "prettier --write"
+    ]
   },
+  "checkFiles": [
+    "src/**/*.js*",
+    "src/**/*.ts*"
+  ],
   "license": "MIT"
 }

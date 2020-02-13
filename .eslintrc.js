@@ -28,7 +28,7 @@ module.exports = {
     'import/no-unresolved': [
       'error',
       {
-        ignore: ['@config/', '@/'],
+        ignore: ['@config/', '@/', '@wetrial'],
       },
     ],
     'key-spacing': 0,
@@ -49,35 +49,12 @@ module.exports = {
     'max-len': ['warn', { code: 400 }],
     'no-unused-expressions': ['error', { allowShortCircuit: true }],
     'class-methods-use-this': 0, //  ["error", { "exceptMethods": ["setDefaultFilter"] }]
-    'react/sort-comp': [
-      1,
-      {
-        order: [
-          'static-properties',
-          'static-methods',
-          'type-annotations',
-          'propTypes',
-          'conventional-private-properties',
-          'properties',
-          'state',
-          'columns',
-          'private-instance-fields',
-          'lifecycle',
-          '/^on.+$/',
-          '/^handle.+$/',
-          '/^get.+$/',
-          'everything-else',
-          'render',
-        ],
-      },
-    ],
-    'no-bitwise': 0,
-    radix: 0,
-    'no-useless-computed-key': 0,
+    'react/sort-comp': 0,
     'dot-notation': 0,
     'no-return-await': 0,
   },
   globals: {
+    REACT_APP_ENV: true,
     page: true,
   },
 };

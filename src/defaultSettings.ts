@@ -1,10 +1,16 @@
+import { MenuTheme } from 'antd/es/menu/MenuContext';
+
 export type ContentWidth = 'Fluid' | 'Fixed';
 
-export interface ISettings {
+export interface IDefaultSettings {
   /**
    * theme for nav menu
    */
-  navTheme: 'dark' | 'light' | undefined;
+  navTheme: MenuTheme;
+  /**
+   * primary color of ant design
+   */
+  primaryColor: string;
   /**
    * nav menu position: `sidemenu` or `topmenu`
    */
@@ -26,32 +32,36 @@ export interface ISettings {
    */
   fixSiderbar: boolean;
   menu: { locale: boolean };
-  pwa?: boolean;
   title: string;
+  pwa: boolean;
   // Your custom iconfont Symbol script Url
   // eg：//at.alicdn.com/t/font_1039637_btcrd5co4w.js
   // 注意：如果需要图标多色，Iconfont 图标项目里要进行批量去色处理
   // Usage: https://github.com/ant-design/ant-design-pro/pull/3517
   iconfontUrl: string;
+  colorWeak: boolean;
 }
 
 // eslint-disable-next-line import/no-mutable-exports
-let defaultSettings: ISettings = {
-  navTheme: 'light',
+let defaultSettings: IDefaultSettings = {
+  navTheme: 'dark',
+  // 拂晓蓝
+  primaryColor: '#1890ff',
   layout: 'sidemenu',
   contentWidth: 'Fluid',
   fixedHeader: true,
-  autoHideHeader: true,
+  autoHideHeader: false,
   fixSiderbar: true,
+  colorWeak: true,
   menu: {
-    locale: false,
+    locale: true,
   },
+  title: 'Ant Design Pro',
   pwa: false,
-  title: 'Wetrial',
   iconfontUrl: '',
 };
 
-export function configDefaultSetting(setting: Partial<ISettings>) {
+export function configDefaultSetting(setting: Partial<IDefaultSettings>) {
   defaultSettings = {
     ...defaultSettings,
     ...setting,

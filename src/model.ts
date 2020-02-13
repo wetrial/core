@@ -5,7 +5,7 @@ import { Reducer } from 'redux';
 interface IModel<TState> {
   namespace: string;
   state: TState;
-  effects?: {
+  effects: {
     [key: string]: Effect;
   };
   reducers?: {
