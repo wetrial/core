@@ -23,12 +23,13 @@
     "dev": "cross-env LAN=zh-CN father doc dev",
     "dev:en-us": "father doc dev",
     "js": "node ./.ts2js.js",
-    "build": "node ./scripts/clean-old-build.js && father build && tsc --declarationDir ./lib --noImplicitAny false && tsc --declarationDir ./es --noImplicitAny false && node ./scripts/build-wind-up.js",
+    "build": "node ./scripts/clean-old-build.js && father build && tsc --declarationDir ./es --noImplicitAny false && node ./scripts/build-wind-up.js",
     "test": "father test",
     "cov": "father test --coverage",
     "help": "father help",
     "precommit": "father pre-commit",
     "build:doc": "father doc build &&cross-env LAN=zh-CN father doc build",
+    "publish:build": "node ./scripts/clean-old-build.js && father build && tsc --declarationDir ./es --noImplicitAny false && node ./scripts/build-wind-up.js && cp -r ./es/* . && rm -rf ./es",
     "pub:doc": "now --prod",
     "patch": "yarn version --patch && git push origin master && git push origin --tags",
     "minor": "yarn version --minor && git push origin master && git push origin --tags",
@@ -43,9 +44,6 @@
     "prettier": "prettier -c --write \"**/*\""
   },
   "files": [
-    "dist",
-    "lib",
-    "es",
     "README.md",
     "LICENSE",
     "package.json"
