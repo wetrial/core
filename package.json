@@ -1,6 +1,6 @@
 {
   "name": "@wetrial/core",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "react component library",
   "keywords": [
     "antd components",
@@ -42,15 +42,15 @@
     "prettier": "prettier -c --write \"**/*\""
   },
   "dependencies": {
-    "axios": "^0.19.2",
-    "dva-model-extend": "^0.1.2",
-    "store": "^2.0.12",
     "@ant-design/icons": "^4.0.0-alpha.19",
     "antd": "^4.0.0-rc.4",
+    "axios": "^0.19.2",
+    "dva-model-extend": "^0.1.2",
     "path-to-regexp": "^6.1.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "store": "^2.0.12"
   },
   "peerDependencies": {
     "@ant-design/icons": "*",
