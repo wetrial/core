@@ -20,8 +20,7 @@
   "homepage": "https://github.com/wetrial/core",
   "scripts": {
     "start": "npm run dev",
-    "dev": "cross-env LAN=zh-CN father doc dev",
-    "dev:en-us": "father doc dev",
+    "dev": "cross-env REACT_APP_ENV=dev father-doc dev",
     "js": "node ./.ts2js.js",
     "build": "node ./scripts/clean-old-build.js && father build && tsc --declarationDir ./es --noImplicitAny false && node ./scripts/build-wind-up.js && cp package.json ./es && cp README.md ./es && cp .npmignore ./es",
     "test": "father test",
@@ -45,7 +44,13 @@
   "dependencies": {
     "axios": "^0.19.2",
     "dva-model-extend": "^0.1.2",
-    "store": "^2.0.12"
+    "store": "^2.0.12",
+    "@ant-design/icons": "^4.0.0-alpha.19",
+    "antd": "^4.0.0-rc.4",
+    "path-to-regexp": "^6.1.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "redux": "^4.0.5"
   },
   "peerDependencies": {
     "@ant-design/icons": "*",
@@ -57,10 +62,8 @@
     "redux": "*"
   },
   "devDependencies": {
-    "@ant-design/icons": "^4.0.0-alpha.19",
     "@types/jest": "^24.0.15",
     "@umijs/fabric": "^2.0.2",
-    "antd": "^4.0.0-rc.4",
     "babel-plugin-import": "^1.12.0",
     "check-prettier": "^1.0.3",
     "cross-env": "^6.0.3",
@@ -69,16 +72,11 @@
     "dva": "2.6.0-beta.16",
     "enzyme": "^3.10.0",
     "father": "^2.13.3",
+    "father-doc": "^1.0.0-beta.5",
     "husky": "^4.2.3",
-    "jackbox": "^0.2.0",
     "lint-staged": "^10.0.7",
-    "now": "^16.7.0",
-    "path-to-regexp": "^6.1.0",
     "prettier": "^1.19.1",
     "raw-loader": "^3.1.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "redux": "^4.0.5",
     "sylvanas": "^0.4.2",
     "typescript": "^3.7.5",
     "umi": "^2.13.3"
