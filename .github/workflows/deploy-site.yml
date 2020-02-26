@@ -13,7 +13,8 @@ jobs:
         uses: actions/checkout@master
       - name: Build
         run: |
-          npm run init
+          npm install
+          npm run build
           npm run build:doc
 
       - name: Deploy
