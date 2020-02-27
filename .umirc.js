@@ -26,9 +26,7 @@ export default {
     logo: 'https://avatars2.githubusercontent.com/u/40448889?s=66&v=4',
     title: 'Wetrial Core',
     include: ['docs'],
-    locales: [
-      ['zh-CN', '中文']
-    ],
+    locales: [['zh-CN', '中文']],
   },
   plugins: [
     [
@@ -38,5 +36,6 @@ export default {
         headScripts: ['https://hm.baidu.com/hm.js?a3636d814818bccb02a7991d78ba3048'],
       },
     ],
+    ['@umijs/plugin-qiankun'],
   ],
 };
