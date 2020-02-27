@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/core/precache-manifest.c6f737e8fbfde68ac3d0ad0e0a528259.js"
+  "/core/precache-manifest.7049bdc7bfda450383a53ae357b42ca8.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "@wetrial/core"});
