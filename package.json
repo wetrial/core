@@ -41,8 +41,8 @@
     "prettier": "prettier -c --write \"**/*\""
   },
   "dependencies": {
-    "@ant-design/icons": "^4.0.0-alpha.19",
-    "antd": "^4.0.0-rc.4",
+    "@ant-design/icons": "^4.0.0",
+    "antd": "^4.0.0",
     "axios": "^0.19.2",
     "dva-model-extend": "^0.1.2",
     "path-to-regexp": "^6.1.0",
