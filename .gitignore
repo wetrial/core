@@ -8,3 +8,4 @@
 /.eslintcache
 /yarn-error.log
 .umi
+.umi-production
