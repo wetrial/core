@@ -50,7 +50,7 @@ $ npm start
 
 [MIT](https://github.com/wetrial/core/blob/master/LICENSE)
 
-[1]: https://www.npmjs.com/package/wetrial/core
-[2]: https://npmjs.org/package/wetrial/core
-[image-1]: https://img.shields.io/npm/v/wetrial/core.svg?style=flat
-[image-2]: https://img.shields.io/npm/dm/wetrial/core.svg?style=flat
+[1]: https://www.npmjs.com/package/@wetrial/core
+[2]: https://npmjs.org/package/@wetrial/core
+[image-1]: https://img.shields.io/npm/v/@wetrial/core.svg?style=flat
+[image-2]: https://img.shields.io/npm/dm/@wetrial/core.svg?style=flat
