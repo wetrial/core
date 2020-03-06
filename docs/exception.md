@@ -1,7 +1,14 @@
 ---
-title: exception 基础异常类
-path: /exception
-order: 1000
+title: 异常
+order: 1
+group:
+  title: 异常
+  path: /exception
+  order: 5
+nav:
+  title: dva基类
+  path: /exception
+  order: 5
 ---
 
 # exception 基础异常类

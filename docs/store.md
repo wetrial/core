@@ -1,7 +1,14 @@
 ---
-title: store 本地存储
-path: /store
-order: 300
+title: 本地存储
+order: 1
+group:
+  title: 本地存储
+  path: /store
+  order: 3
+nav:
+  title: 本地存储
+  path: /store
+  order: 3
 ---
 
 # store 本地存储

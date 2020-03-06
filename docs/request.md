@@ -1,7 +1,14 @@
 ---
-title: request ajax请求
-path: /request
-order: 12000
+title: ajax
+order: 1
+group:
+  title: ajax
+  path: /request
+  order: 5
+nav:
+  title: ajax
+  path: /request
+  order: 6
 ---
 
 # request ajax 请求

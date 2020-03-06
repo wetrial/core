@@ -1,7 +1,14 @@
 ---
-title: authority 权限相关
-path: /authority
-order: 1000
+title: 权限相关
+order: 1
+group:
+  title: 权限相关
+  path: /authority
+  order: 1
+nav:
+  title: 权限相关
+  path: /authority
+  order: 1
 ---
 
 # authority 权限相关

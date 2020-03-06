@@ -20,14 +20,15 @@
   "homepage": "https://github.com/wetrial/core",
   "scripts": {
     "start": "npm run dev",
-    "dev": "cross-env REACT_APP_ENV=dev father-doc dev",
+    "list": "dumi plugin list",
+    "dev": "dumi dev",
     "js": "node ./.ts2js.js",
     "build": "node ./scripts/clean-old-build.js && father build && tsc --declarationDir ./es --noImplicitAny false && node ./scripts/build-wind-up.js && cp package.json ./es && cp README.md ./es && cp .npmignore ./es",
     "test": "father test",
     "cov": "father test --coverage",
     "help": "father help",
     "precommit": "father pre-commit",
-    "build:doc": "father-doc build",
+    "build:doc": "dumi build",
     "patch": "yarn version --patch && git push origin master && git push origin --tags",
     "minor": "yarn version --minor && git push origin master && git push origin --tags",
     "major": "yarn version --major && git push origin master && git push origin --tags",
@@ -38,62 +39,49 @@
     "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./",
     "lint:prettier": "check-prettier lint",
     "lint:style": "stylelint --fix \"src/**/*.less\" --syntax less",
-    "prettier": "prettier -c --write \"**/*\""
+    "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'"
   },
   "dependencies": {
-    "@ant-design/icons": "^4.0.0",
-    "antd": "^4.0.0",
     "axios": "^0.19.2",
     "dva-model-extend": "^0.1.2",
     "path-to-regexp": "^6.1.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
     "redux": "^4.0.5",
     "store": "^2.0.12"
   },
   "peerDependencies": {
-    "@ant-design/icons": "*",
-    "antd": "*",
-    "dva": "*",
     "path-to-regexp": "*",
-    "react": "*",
-    "react-dom": "*",
     "redux": "*"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.15",
-    "@umijs/fabric": "^2.0.2",
-    "@umijs/plugin-qiankun": "1.4.0",
-    "babel-plugin-import": "^1.12.0",
+    "@types/jest": "^25.1.3",
+    "@umijs/fabric": "^2.0.3",
+    "@umijs/plugin-qiankun": "^2.0.5",
+    "@umijs/test": "^3.0.4",
     "check-prettier": "^1.0.3",
-    "cross-env": "^6.0.3",
     "del": "^5.1.0",
-    "docz-theme-umi-hooks": "^0.0.7",
-    "dva": "2.6.0-beta.16",
-    "enzyme": "^3.10.0",
-    "father": "^2.13.3",
-    "father-doc": "^1.0.0-beta.5",
-    "husky": "^4.2.3",
-    "lint-staged": "^10.0.7",
+    "dumi": "^1.0.3",
+    "enzyme": "^3.11.0",
+    "father": "^2.29.2",
+    "lint-staged": "^10.0.8",
     "prettier": "^1.19.1",
-    "raw-loader": "^3.1.0",
-    "sylvanas": "^0.4.2",
-    "typescript": "^3.7.5",
-    "umi": "^2.13.3"
+    "typescript": "^3.8.3",
+    "umi": "^3.0.4",
+    "yorkie": "^2.0.0"
   },
   "engines": {
     "node": ">=10.0.0"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint-staged"
-    }
+  "gitHooks": {
+    "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "**/*.less": "stylelint --syntax less",
-    "**/*.{js,jsx,ts,tsx}": "npm run lint-staged:js",
-    "**/*.{js,jsx,tsx,ts,less,md,json}": [
-      "prettier --write"
+    "*.{js,jsx,less,md,json}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.ts?(x)": [
+      "prettier --parser=typescript --write",
+      "git add"
     ]
   },
   "checkFiles": [

@@ -1,7 +1,14 @@
 ---
-title: utils 辅助方法
-path: /utils
-order: 200
+title: 辅助方法
+order: 1
+group:
+  title: 辅助方法
+  path: /utils
+  order: 1
+nav:
+  title: 辅助方法
+  path: /utils
+  order: 1
 ---
 
 # utils 辅助方法

@@ -1,7 +1,14 @@
 ---
-title: validation 验证
-path: /validation
-order: 300
+title: 验证
+order: 10
+group:
+  title: 验证
+  path: /authority
+  order: 2
+nav:
+  title: 验证
+  path: /authority
+  order: 2
 ---
 
 # validation 验证

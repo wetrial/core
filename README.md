@@ -1,8 +1,6 @@
 ---
-name: wetrial/core
-route: /
-edit: false
-sidebar: true
+title: 关于本站
+order: 1
 ---
 
 # @wetrial/core

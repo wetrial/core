@@ -1,7 +1,14 @@
 ---
-title: model model基础类
-path: /model
-order: 1100
+title: dva基类
+order: 1
+group:
+  title: dva基类
+  path: /model
+  order: 4
+nav:
+  title: dva基类
+  path: /model
+  order: 4
 ---
 
 # model model 基础类
