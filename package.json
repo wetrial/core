@@ -1,6 +1,6 @@
 {
   "name": "@wetrial/core",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "react component library",
   "keywords": [
     "antd components",
@@ -49,9 +49,9 @@
     "store": "^2.0.12"
   },
   "peerDependencies": {
+    "dva": "*",
     "path-to-regexp": "*",
-    "redux": "*",
-    "dva": "*"
+    "redux": "*"
   },
   "devDependencies": {
     "@types/jest": "^25.1.3",
