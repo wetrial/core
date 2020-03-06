@@ -1,6 +1,6 @@
 {
   "name": "@wetrial/core",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "react component library",
   "keywords": [
     "antd components",
@@ -62,6 +62,7 @@
     "dumi": "^1.0.3",
     "enzyme": "^3.11.0",
     "father": "^2.29.2",
+    "husky": "^4.2.3",
     "lint-staged": "^10.0.8",
     "prettier": "^1.19.1",
     "typescript": "^3.8.3",
