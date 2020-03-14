@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosRequestConfig, Method, AxiosResponse } from 'axios';
 
 import { omit, assign } from 'lodash';
 import { message } from 'antd';
@@ -6,9 +6,9 @@ import { getToken } from './authority';
 import { UnAuthorizedException, UserFriendlyException } from './exception';
 
 export interface IRequestOption extends AxiosRequestConfig {
-  showTip?: boolean; // 操作成功是否提示
-  url: string; // 请求的url
-  method?: 'post' | 'get' | 'put' | 'delete' | 'patch';
+  successTip?: boolean; // 操作成功是否提示
+  skipErrorHandler?: boolean; // 是否跳过错误处理(主要为后端异常&success为false的时候是否自动弹错误信息)
+  method?: Method;
 }
 
 // eslint-disable-next-line
@@ -16,6 +16,8 @@ let instance = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  // timeout: 6000,
+  timeoutErrorMessage: '请求超时，请重试!',
 });
 
 /**
@@ -34,35 +36,28 @@ const commonRequestInterceptor = [
  * 通用响应拦截，拦截异常信息(非200-302之间的状态码)、未授权等
  */
 const commonResponseInterceptor = [
-  (rep: any): any => {
-    const { config } = rep;
-    // eslint-disable-next-line dot-notation
-    if (config['showTip']) {
+  (response: AxiosResponse): any => {
+    const { data, config } = response;
+    const requestConfig = config as IRequestOption;
+
+    if (requestConfig.successTip) {
       message.success('操作成功', 2);
     }
-    const {
-      data = {
-        result: null,
-      },
-    } = rep;
-    return data['result'];
+    return Promise.resolve(data);
   },
-  ({ response }) => {
-    const { error, unAuthorizedRequest } = response.data;
-    let exception;
-    if (unAuthorizedRequest) {
-      exception = new UnAuthorizedException(error.message);
-    } else if (error) {
-      exception = new UserFriendlyException(
-        error.code,
-        error.message,
-        error.details,
-        error.validationErrors,
-      );
-    } else {
-      exception = new Error(response.statusText);
+  (response: AxiosResponse) => {
+    const { data, config, status } = response;
+    const requestConfig = config as IRequestOption;
+    if (requestConfig.skipErrorHandler) {
+      return Promise.reject(data);
     }
-    return Promise.reject(exception);
+    let exception;
+    if (status === 401) {
+      exception = data as UnAuthorizedException;
+    } else {
+      exception = data as UserFriendlyException;
+    }
+    throw exception;
   },
 ];
 
@@ -71,52 +66,67 @@ export async function request<TResult = any>(opt: IRequestOption) {
   return (result as unknown) as TResult;
 }
 
-export async function get<TResult = any>(opt: IRequestOption | string) {
-  let options: IRequestOption;
-  if (typeof opt === 'string') {
-    options = {
-      url: opt as string,
-    };
-  } else {
-    options = opt;
-  }
+export async function get<TResult = any>(url: string, opt?: IRequestOption) {
   return await request<TResult>({
-    ...omit(options, 'data'),
+    url,
+    ...omit(opt, 'data'),
     method: 'get',
-    params: { timespan: new Date().getTime(), ...options.data },
-    showTip: false,
+    params: { timespan: new Date().getTime(), ...opt?.data },
+    successTip: false,
   });
 }
 
-export async function post<TResult = any>(opt: IRequestOption) {
+export async function post<TResult = any>(url: string, opt: IRequestOption) {
   return await request<TResult>({
-    showTip: true,
+    url,
+    successTip: true,
     ...opt,
     method: 'post',
   });
 }
 
-export async function put<TResult = any>(opt: IRequestOption) {
+export async function put<TResult = any>(url: string, opt: IRequestOption) {
   return await request<TResult>({
-    showTip: true,
+    url,
+    successTip: true,
     ...opt,
     method: 'put',
   });
 }
 
-export async function patch<TResult = any>(opt: IRequestOption) {
+export async function patch<TResult = any>(url: string, opt: IRequestOption) {
   return await request<TResult>({
-    showTip: true,
+    url,
+    successTip: true,
     ...opt,
     method: 'patch',
   });
 }
 
-export async function del<TResult = any>(opt: IRequestOption) {
+export async function del<TResult = any>(url: string, opt: IRequestOption) {
   return await request<TResult>({
-    showTip: true,
+    url,
+    successTip: true,
     ...opt,
     method: 'delete',
+  });
+}
+
+export async function head<TResult = any>(url: string, opt: IRequestOption) {
+  return await request<TResult>({
+    url,
+    successTip: true,
+    ...opt,
+    method: 'HEAD',
+  });
+}
+
+export async function options<TResult = any>(url: string, opt: IRequestOption) {
+  return await request<TResult>({
+    url,
+    successTip: true,
+    ...opt,
+    method: 'OPTIONS',
   });
 }
 
@@ -143,6 +153,7 @@ function ejectResponseInterceptor(interceptorId: number) {
 }
 
 export {
+  axios,
   instance,
   commonRequestInterceptor,
   commonResponseInterceptor,
