@@ -24,6 +24,7 @@
     "dev": "dumi dev",
     "js": "node ./.ts2js.js",
     "build": "node ./scripts/clean-old-build.js && father build && tsc --declarationDir ./es --noImplicitAny false && node ./scripts/build-wind-up.js && cp package.json ./es && cp README.md ./es && cp .npmignore ./es",
+    "build:dev": "node ./scripts/clean-old-build.js && father build && tsc --declarationDir ./es --noImplicitAny false && node ./scripts/build-wind-up.js",
     "test": "father test",
     "cov": "father test --coverage",
     "help": "father help",
