@@ -63,7 +63,8 @@ const result = await get('');
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
-| showTip | 是否显示操作成功的提示 | boolean? | get 请求 false,其他 true |
+| successTip | 是否显示操作成功的提示 | boolean? | get 请求 false,其他 true |
+| skipErrorHandler | 是否不对错误进行拦截处理 | boolean? | get 请求 false,其他 true |
 | url | 请求的 url 地址 | string | - |
 | method | 请求的 method,可以通过扩展方法比如，post 不需要提供该参数 | string? 'post'、'get'、'put','delete','patch' | - |
 | [更多配置](https://github.com/axios/axios#request-config) |  |  | - |

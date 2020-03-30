@@ -1,6 +1,6 @@
 {
   "name": "@wetrial/core",
-  "version": "1.1.6",
+  "version": "2.0.0",
   "description": "react component library",
   "keywords": [
     "antd components",
@@ -44,11 +44,13 @@
   "dependencies": {
     "axios": "^0.19.2",
     "dva-model-extend": "^0.1.2",
+    "lodash": "^4.17.15",
     "path-to-regexp": "^6.1.0",
     "redux": "^4.0.5",
     "store": "^2.0.12"
   },
   "peerDependencies": {
+    "lodash": "*",
     "path-to-regexp": "*",
     "redux": "*"
   },
@@ -60,8 +62,10 @@
     "check-prettier": "^1.0.3",
     "del": "^5.1.0",
     "dumi": "^1.0.13",
+    "dva": "^2.4.1",
     "enzyme": "^3.11.0",
     "father": "^2.29.2",
+    "husky": "^4.2.3",
     "lint-staged": "^10.0.8",
     "prettier": "^1.19.1",
     "typescript": "^3.8.3",
