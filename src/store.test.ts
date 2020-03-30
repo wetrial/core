@@ -1,4 +1,4 @@
-import { setToken, getToken, clearToken, setPermissions, getPermissions } from './authority';
+import { setToken, getToken, clearToken } from './authority';
 
 describe('store', () => {
   describe('setToken && getToken && clearToken', () => {
@@ -28,10 +28,10 @@ describe('store', () => {
     });
   });
 
-  describe('setPermissions && getPermissions', () => {
-    it('without exp', () => {
-      setPermissions(['admin', 'rolemanager']);
-      expect(getPermissions()).toEqual(['admin', 'rolemanager']);
-    });
-  });
+  // describe('setPermissions && getPermissions', () => {
+  //   it('without exp', () => {
+  //     setPermissions(['admin', 'rolemanager']);
+  //     expect(getPermissions()).toEqual(['admin', 'rolemanager']);
+  //   });
+  // });
 });
