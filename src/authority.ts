@@ -1,7 +1,6 @@
 import storeWithExp from './store';
 
-const preFix = 'WETRIAL';
-let token_name = `${preFix}.TOKEN`;
+let token_name = `WETRIAL.TOKEN`;
 
 export const configTokenName = (tokenName: string) => {
   token_name = tokenName;
