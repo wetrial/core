@@ -45,7 +45,7 @@ const commonResponseInterceptor = [
     }
     return Promise.resolve(data);
   },
-  (response: AxiosResponse) => {
+  ({ response }: { response: AxiosResponse }) => {
     const { data, config, status } = response;
     const requestConfig = config as IRequestOption;
     if (requestConfig.skipErrorHandler) {
@@ -54,8 +54,10 @@ const commonResponseInterceptor = [
     let exception;
     if (status === 401) {
       exception = data as UnAuthorizedException;
-    } else {
+    } else if (status === 500) {
       exception = data as UserFriendlyException;
+    } else {
+      exception = data;
     }
     throw exception;
   },
