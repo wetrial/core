@@ -25,9 +25,12 @@ let instance = axios.create({
  */
 const commonRequestInterceptor = [
   (config: any) => {
-    assign(config.headers, {
-      Authorization: `Bearer ${getToken()}`,
-    });
+    const token = getToken();
+    const header: any = {};
+    if (token) {
+      header.Authorization = `Bearer ${getToken()}`;
+    }
+    assign(config.headers, header);
     return config;
   },
 ];
