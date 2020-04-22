@@ -21,6 +21,14 @@ let instance = axios.create({
 });
 
 /**
+ * 修改axios实例
+ * @param config 配置
+ */
+export const configInstance = (config: AxiosRequestConfig) => {
+  instance = axios.create(config);
+};
+
+/**
  * 通用请求拦截器
  */
 const commonRequestInterceptor = [
