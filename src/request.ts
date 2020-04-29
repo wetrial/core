@@ -89,7 +89,7 @@ export async function get<TResult = any>(url: string, opt?: IRequestOption) {
   });
 }
 
-export async function post<TResult = any>(url: string, opt: IRequestOption) {
+export async function post<TResult = any>(url: string, opt?: IRequestOption) {
   return await request<TResult>({
     url,
     successTip: true,
@@ -98,7 +98,7 @@ export async function post<TResult = any>(url: string, opt: IRequestOption) {
   });
 }
 
-export async function put<TResult = any>(url: string, opt: IRequestOption) {
+export async function put<TResult = any>(url: string, opt?: IRequestOption) {
   return await request<TResult>({
     url,
     successTip: true,
@@ -107,7 +107,7 @@ export async function put<TResult = any>(url: string, opt: IRequestOption) {
   });
 }
 
-export async function patch<TResult = any>(url: string, opt: IRequestOption) {
+export async function patch<TResult = any>(url: string, opt?: IRequestOption) {
   return await request<TResult>({
     url,
     successTip: true,
@@ -116,7 +116,7 @@ export async function patch<TResult = any>(url: string, opt: IRequestOption) {
   });
 }
 
-export async function del<TResult = any>(url: string, opt: IRequestOption) {
+export async function del<TResult = any>(url: string, opt?: IRequestOption) {
   return await request<TResult>({
     url,
     successTip: true,
@@ -125,7 +125,7 @@ export async function del<TResult = any>(url: string, opt: IRequestOption) {
   });
 }
 
-export async function head<TResult = any>(url: string, opt: IRequestOption) {
+export async function head<TResult = any>(url: string, opt?: IRequestOption) {
   return await request<TResult>({
     url,
     successTip: true,
@@ -134,7 +134,7 @@ export async function head<TResult = any>(url: string, opt: IRequestOption) {
   });
 }
 
-export async function options<TResult = any>(url: string, opt: IRequestOption) {
+export async function options<TResult = any>(url: string, opt?: IRequestOption) {
   return await request<TResult>({
     url,
     successTip: true,
