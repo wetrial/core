@@ -1,5 +1,5 @@
 import { isEqual } from 'lodash';
-import { urlToList, isPromise, isUrl, getQuery, isBrowser, listToFlat } from './utils';
+import { urlToList, isPromise, isUrl, isBrowser, listToFlat } from './utils';
 
 describe('util', () => {
   describe('urlToList', () => {
@@ -49,20 +49,6 @@ describe('util', () => {
 
     it('related path', () => {
       expect(isUrl('blog.xxgtalk.cn')).toBe(false);
-    });
-  });
-
-  describe('getQuery', () => {
-    it('empty', () => {
-      expect(getQuery()).toEqual({});
-    });
-
-    it('one', () => {
-      expect(getQuery('id=1')).toEqual({ id: '1' });
-    });
-
-    it('two arguments', () => {
-      expect(getQuery('id=1&name=xxg')).toEqual({ id: '1', name: 'xxg' });
     });
   });
 

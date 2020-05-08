@@ -1,5 +1,3 @@
-import { parse } from 'qs';
-
 import { reduce } from 'lodash';
 import { IKeyValue } from './types';
 
@@ -39,18 +37,6 @@ export function isPromise(obj: any): boolean {
  * @returns {boolean} 如果是 返回 true，否则 false
  */
 export const isUrl = (path: string): boolean => reg.test(path);
-
-/**
- * 解析url后的查询字符串并转化成object对象
- * @param data 要解析的字符串，没有则默认使用location.href
- */
-export function getQuery(query?: string): { [key: string]: string } {
-  let queryUrl = query || '';
-  if (queryUrl.indexOf('?') !== -1) {
-    [, queryUrl] = queryUrl.split('?');
-  }
-  return parse(queryUrl);
-}
 
 /**
  * 将数组对象转换成object对象
