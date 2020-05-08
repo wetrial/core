@@ -55,13 +55,13 @@ export function getQuery(query?: string): { [key: string]: string } {
 /**
  * 将数组对象转换成object对象
  * @param items 要转换的数组
- * @param key 作为key的属性名
- * @param value  作为值的属性名
- * @example  convertListToFlat([{label:'label1',value:'001'},{label:'label2',value:'002'}],'value','label')==>{'001':'label1','002':'label2'}
+ * @param key 作为key的属性名 默认为 'label'
+ * @param value  作为值的属性名 默认为'value'
+ * @example  listToFlat([{label:'label1',value:'001'},{label:'label2',value:'002'}],'value','label')==>{'001':'label1','002':'label2'}
  * @returns IKeyValue
  * @summary 建议配合memoize方法使用避免不必要的转换，提高性能
  */
-export function convertListToFlat<T>(items: T[], key: keyof T, text: keyof T): IKeyValue<keyof T> {
+export function listToFlat<T>(items: T[], key: keyof T, text: keyof T): IKeyValue<keyof T> {
   return reduce(
     items,
     (redu: IKeyValue<keyof T>, item) => {
