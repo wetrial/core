@@ -43,6 +43,7 @@
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'"
   },
   "dependencies": {
+    "antd": "^4.2.0",
     "axios": "^0.19.2",
     "dva-model-extend": "^0.1.2",
     "lodash": "^4.17.15",
@@ -51,6 +52,7 @@
     "store": "^2.0.12"
   },
   "peerDependencies": {
+    "antd": "*",
     "lodash": "*",
     "path-to-regexp": "*",
     "redux": "*"
