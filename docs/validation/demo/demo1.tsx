@@ -1,6 +1,6 @@
 import React from 'react';
 import { ConfigProvider, Form, Input, InputNumber, Button } from 'antd';
-import validateMessages from '@wetrial/core/validation';
+import validateMessages from '@wetrial/core/es/validation';
 
 const layout = {
   labelCol: { span: 4 },
@@ -11,11 +11,11 @@ const tailLayout = {
 };
 
 export default () => {
-  const onFinish = values => {
+  const onFinish = (values) => {
     console.log('Success:', values);
   };
 
-  const onFinishFailed = errorInfo => {
+  const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
 

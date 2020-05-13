@@ -26,7 +26,7 @@ npm i @wetrial/core --save
 ## 🔨 使用
 
 ```
-import { request } from '@wetrial/core';
+import { get } from '@wetrial/core';
 ```
 
 ## 🖥 开发
@@ -39,6 +39,10 @@ $ npm start
 ```
 
 打开浏览器访问 http://127.0.0.1:8001
+
+## 说明
+
+库中只会将高频使用的方法在 index 中导出，其他的需要全名引用，如：`import validationMessage from '@wetrial/core/es/validation'`
 
 ## 🤝 贡献
 

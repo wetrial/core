@@ -1,14 +1,13 @@
 ---
-title: 异常
-order: 1
-group:
-  title: 异常
-  path: /exception
-  order: 5
+title: exception
+order: 40
 nav:
-  title: dva基类
-  path: /exception
-  order: 5
+  title: 核心
+  path: /list
+group:
+  title: 通用
+  path: /common
+legacy: /common/exception
 ---
 
 # exception 基础异常类
@@ -18,7 +17,7 @@ nav:
 ## 使用方式
 
 ```tsx |pure
-import { UnAuthorizedException, UserFriendlyException } from '@wetrial/core/exception';
+import { UnAuthorizedException, UserFriendlyException } from '@wetrial/core/es/exception';
 
 throw new UnAuthorizedException();
 ```
