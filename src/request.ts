@@ -165,7 +165,7 @@ function ejectResponseInterceptor(interceptorId: number) {
   return instance.interceptors.response.eject(interceptorId);
 }
 
-const exportRequest = {
+export {
   axios,
   instance,
   commonRequestInterceptor,
@@ -174,14 +174,4 @@ const exportRequest = {
   ejectRequestInterceptor,
   addResponseInterceptor,
   ejectResponseInterceptor,
-  request,
-  get,
-  post,
-  put,
-  patch,
-  del,
-  head,
-  options,
 };
-
-export default exportRequest;
