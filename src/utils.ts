@@ -1,4 +1,5 @@
 import { reduce } from 'lodash';
+import { parse } from 'querystring';
 import { IKeyValue } from './types';
 
 /* eslint no-useless-escape:0 import/prefer-default-export:0 */
@@ -65,3 +66,5 @@ export function listToFlat<T>(items: T[], key: string | number = 'value', text: 
  * 判断是否是浏览器环境
  */
 export const isBrowser = () => typeof window !== 'undefined';
+
+export const getPageQuery = () => parse(window.location.href.split('?')[1]);
