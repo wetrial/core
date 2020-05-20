@@ -1,3 +1,4 @@
+/* eslint-disable no-bitwise */
 import { parse } from 'qs';
 
 /* eslint no-useless-escape:0 import/prefer-default-export:0 */
@@ -55,3 +56,18 @@ export function getQuery(query?: string): { [key: string]: string } {
  * 判断是否是浏览器环境
  */
 export const isBrowser = () => typeof window !== 'undefined';
+
+/**
+ * 生成一个guid
+ */
+export function guid() {
+  let d = Date.now();
+  if (typeof performance !== 'undefined' && typeof performance.now === 'function') {
+    d += performance.now();
+  }
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+    const r = (d + Math.random() * 16) % 16 | 0;
+    d = Math.floor(d / 16);
+    return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
+  });
+}
