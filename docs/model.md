@@ -1,14 +1,13 @@
 ---
-title: dva基类
-order: 1
-group:
-  title: dva基类
-  path: /model
-  order: 4
+title: dva model
+order: 30
 nav:
-  title: dva基类
-  path: /model
-  order: 4
+  title: 核心
+  path: /list
+group:
+  title: 通用
+  path: /common
+legacy: /common/model
 ---
 
 # model model 基础类
@@ -18,7 +17,7 @@ nav:
 ## 使用方式
 
 ```tsx |pure
-import extend from '@wetrial/core/model';
+import extend from '@wetrial/core';
 
 export interface IAccountModelState {
   currentUser?: any;

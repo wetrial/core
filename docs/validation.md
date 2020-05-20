@@ -1,14 +1,13 @@
 ---
 title: 验证
-order: 10
-group:
-  title: 验证
-  path: /authority
-  order: 2
+order: 100
 nav:
-  title: 验证
-  path: /authority
-  order: 2
+  title: 核心
+  path: /list
+group:
+  title: 通用
+  path: /common
+legacy: /common/validation
 ---
 
 # validation 验证

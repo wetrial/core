@@ -1,5 +1,7 @@
 /* eslint-disable no-bitwise */
-import { parse } from 'qs';
+import { reduce } from 'lodash';
+import { parse } from 'querystring';
+import { IKeyValue } from './types';
 
 /* eslint no-useless-escape:0 import/prefer-default-export:0 */
 const reg = /(((^https?:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+(?::\d+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/;
@@ -36,20 +38,29 @@ export function isPromise(obj: any): boolean {
  * @param path 地址
  * @returns {boolean} 如果是 返回 true，否则 false
  */
-export function isUrl(path: string): boolean {
-  return reg.test(path);
-}
+export const isUrl = (path: string): boolean => reg.test(path);
 
 /**
- * 解析url后的查询字符串并转化成object对象
- * @param data 要解析的字符串，没有则默认使用location.href
+ * 将数组对象转换成object对象
+ * @param items 要转换的数组
+ * @param key 作为key的属性名 默认为 'label'
+ * @param value  作为值的属性名 默认为'value'
+ * @example  listToFlat([{label:'label1',value:'001'},{label:'label2',value:'002'}],'value','label')==>{'001':'label1','002':'label2'}])
+ * @returns IKeyValue
+ * @summary 建议配合memoize方法使用避免不必要的转换，提高性能
  */
-export function getQuery(query?: string): { [key: string]: string } {
-  let queryUrl = query || '';
-  if (queryUrl.indexOf('?') !== -1) {
-    [, queryUrl] = queryUrl.split('?');
-  }
-  return parse(queryUrl);
+export function listToFlat<T>(items: T[], key: string | number = 'value', text: string = 'label') {
+  return reduce(
+    items,
+    (redu: IKeyValue<keyof T>, item) => {
+      const reduKey = item[key];
+      // @ts-ignore
+      // eslint-disable-next-line no-param-reassign
+      redu[reduKey] = item[text];
+      return redu;
+    },
+    {},
+  );
 }
 
 /**
@@ -57,6 +68,7 @@ export function getQuery(query?: string): { [key: string]: string } {
  */
 export const isBrowser = () => typeof window !== 'undefined';
 
+export const getPageQuery = () => parse(window.location.href.split('?')[1]);
 /**
  * 生成一个guid
  */

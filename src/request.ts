@@ -21,13 +21,24 @@ let instance = axios.create({
 });
 
 /**
+ * 修改axios实例
+ * @param config 配置
+ */
+export const configInstance = (config: AxiosRequestConfig) => {
+  instance = axios.create(config);
+};
+
+/**
  * 通用请求拦截器
  */
 const commonRequestInterceptor = [
   (config: any) => {
-    assign(config.headers, {
-      Authorization: `Bearer ${getToken()}`,
-    });
+    const token = getToken();
+    const header: any = {};
+    if (token) {
+      header.Authorization = `Bearer ${getToken()}`;
+    }
+    assign(config.headers, header);
     return config;
   },
 ];
@@ -45,7 +56,7 @@ const commonResponseInterceptor = [
     }
     return Promise.resolve(data);
   },
-  (response: AxiosResponse) => {
+  ({ response }: { response: AxiosResponse }) => {
     const { data, config, status } = response;
     const requestConfig = config as IRequestOption;
     if (requestConfig.skipErrorHandler) {
@@ -54,8 +65,10 @@ const commonResponseInterceptor = [
     let exception;
     if (status === 401) {
       exception = data as UnAuthorizedException;
-    } else {
+    } else if (status === 500) {
       exception = data as UserFriendlyException;
+    } else {
+      exception = data;
     }
     throw exception;
   },
@@ -76,7 +89,7 @@ export async function get<TResult = any>(url: string, opt?: IRequestOption) {
   });
 }
 
-export async function post<TResult = any>(url: string, opt: IRequestOption) {
+export async function post<TResult = any>(url: string, opt?: IRequestOption) {
   return await request<TResult>({
     url,
     successTip: true,
@@ -85,7 +98,7 @@ export async function post<TResult = any>(url: string, opt: IRequestOption) {
   });
 }
 
-export async function put<TResult = any>(url: string, opt: IRequestOption) {
+export async function put<TResult = any>(url: string, opt?: IRequestOption) {
   return await request<TResult>({
     url,
     successTip: true,
@@ -94,7 +107,7 @@ export async function put<TResult = any>(url: string, opt: IRequestOption) {
   });
 }
 
-export async function patch<TResult = any>(url: string, opt: IRequestOption) {
+export async function patch<TResult = any>(url: string, opt?: IRequestOption) {
   return await request<TResult>({
     url,
     successTip: true,
@@ -103,7 +116,7 @@ export async function patch<TResult = any>(url: string, opt: IRequestOption) {
   });
 }
 
-export async function del<TResult = any>(url: string, opt: IRequestOption) {
+export async function del<TResult = any>(url: string, opt?: IRequestOption) {
   return await request<TResult>({
     url,
     successTip: true,
@@ -112,7 +125,7 @@ export async function del<TResult = any>(url: string, opt: IRequestOption) {
   });
 }
 
-export async function head<TResult = any>(url: string, opt: IRequestOption) {
+export async function head<TResult = any>(url: string, opt?: IRequestOption) {
   return await request<TResult>({
     url,
     successTip: true,
@@ -121,7 +134,7 @@ export async function head<TResult = any>(url: string, opt: IRequestOption) {
   });
 }
 
-export async function options<TResult = any>(url: string, opt: IRequestOption) {
+export async function options<TResult = any>(url: string, opt?: IRequestOption) {
   return await request<TResult>({
     url,
     successTip: true,

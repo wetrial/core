@@ -1,14 +1,13 @@
 ---
 title: 权限相关
-order: 1
-group:
-  title: 权限相关
-  path: /authority
-  order: 1
+order: 50
 nav:
-  title: 权限相关
-  path: /authority
-  order: 1
+  title: 核心
+  path: /list
+group:
+  title: 通用
+  path: /common
+legacy: /common/authority
 ---
 
 # authority 权限相关
@@ -18,7 +17,7 @@ nav:
 ## 使用方式
 
 ```tsx |pure
-import { setToken, getToken } from '@wetrial/core/authority';
+import { setToken, getToken } from '@wetrial/core/es/authority';
 
 const token = getToken();
 ```

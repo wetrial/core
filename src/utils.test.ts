@@ -1,4 +1,5 @@
-import { urlToList, isPromise, isUrl, getQuery, isBrowser } from './utils';
+import { isEqual } from 'lodash';
+import { urlToList, isPromise, isUrl, isBrowser, listToFlat } from './utils';
 
 describe('util', () => {
   describe('urlToList', () => {
@@ -51,23 +52,25 @@ describe('util', () => {
     });
   });
 
-  describe('getQuery', () => {
-    it('empty', () => {
-      expect(getQuery()).toEqual({});
-    });
-
-    it('one', () => {
-      expect(getQuery('id=1')).toEqual({ id: '1' });
-    });
-
-    it('two arguments', () => {
-      expect(getQuery('id=1&name=xxg')).toEqual({ id: '1', name: 'xxg' });
-    });
-  });
-
   describe('isBrowser', () => {
     it('empty', () => {
       expect(isBrowser()).toBe(true);
+    });
+  });
+
+  describe('listToFlat', () => {
+    it('default convert', () => {
+      const dict = [{ label: 'label1', value: '001' }, { label: 'label2', value: '002' }];
+      const result = listToFlat(dict);
+      const isTrue = isEqual(result, { '001': 'label1', '002': 'label2' });
+      expect(isTrue).toBe(true);
+    });
+
+    it('self key convert', () => {
+      const dict = [{ Text: '广州', Code: 'guanghzou' }, { Text: '上海', Code: 'shanghai' }];
+      const result = listToFlat(dict, 'Code', 'Text');
+      const isTrue = isEqual(result, { guanghzou: '广州', shanghai: '上海' });
+      expect(isTrue).toBe(true);
     });
   });
 });

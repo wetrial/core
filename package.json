@@ -1,10 +1,9 @@
 {
   "name": "@wetrial/core",
-  "version": "2.0.0",
-  "description": "react component library",
+  "version": "3.0.3",
+  "description": "wetrial core library",
   "keywords": [
-    "antd components",
-    "react components"
+    "library"
   ],
   "main": "./lib/index.js",
   "module": "./es/index.js",
@@ -23,7 +22,8 @@
     "list": "dumi plugin list",
     "dev": "dumi dev",
     "js": "node ./.ts2js.js",
-    "build": "node ./scripts/clean-old-build.js && father build && tsc --declarationDir ./es --noImplicitAny false && node ./scripts/build-wind-up.js && cp package.json ./es && cp README.md ./es && cp .npmignore ./es",
+    "build": "node ./scripts/clean-old-build.js && father build && tsc --declarationDir ./lib && tsc --declarationDir ./es && node ./scripts/build-wind-up.js",
+    "build:dev": "father build && tsc --declarationDir ./lib && tsc --declarationDir ./es",
     "test": "father test",
     "cov": "father test --coverage",
     "help": "father help",
@@ -42,34 +42,36 @@
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'"
   },
   "dependencies": {
+    "antd": "^4.2.2",
     "axios": "^0.19.2",
     "dva-model-extend": "^0.1.2",
+    "lodash": "^4.17.15",
     "path-to-regexp": "^6.1.0",
     "redux": "^4.0.5",
     "store": "^2.0.12"
   },
   "peerDependencies": {
-    "dva": "*",
+    "antd": "*",
+    "lodash": "*",
     "path-to-regexp": "*",
     "redux": "*"
   },
   "devDependencies": {
-    "@types/jest": "^25.1.3",
-    "@umijs/fabric": "^2.0.3",
-    "@umijs/plugin-qiankun": "^2.0.5",
-    "@umijs/test": "^3.0.4",
+    "@types/jest": "^25.2.1",
+    "@umijs/fabric": "^2.0.8",
+    "@umijs/plugin-qiankun": "^2.1.1",
+    "@umijs/test": "^3.1.4",
     "check-prettier": "^1.0.3",
     "del": "^5.1.0",
-    "dumi": "^1.0.3",
+    "dumi": "^1.0.24",
     "dva": "^2.4.1",
     "enzyme": "^3.11.0",
-    "father": "^2.29.2",
-    "husky": "^4.2.3",
-    "lint-staged": "^10.0.8",
-    "prettier": "^1.19.1",
-    "typescript": "^3.8.3",
-    "umi": "^3.0.4",
-    "yorkie": "^2.0.0"
+    "father": "^2.29.3",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.2",
+    "prettier": "^2.0.5",
+    "typescript": "^3.9.2",
+    "umi": "^3.1.4"
   },
   "engines": {
     "node": ">=10.0.0"

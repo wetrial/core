@@ -1,14 +1,13 @@
 ---
 title: 本地存储
-order: 1
-group:
-  title: 本地存储
-  path: /store
-  order: 3
+order: 20
 nav:
-  title: 本地存储
-  path: /store
-  order: 3
+  title: 核心
+  path: /list
+group:
+  title: 通用
+  path: /common
+legacy: /common/store
 ---
 
 # store 本地存储
@@ -18,7 +17,7 @@ nav:
 ## 使用方式
 
 ```tsx |pure
-import store from '@wetrial/core/store';
+import store from '@wetrial/core/es/store';
 
 store.set('', '');
 ```

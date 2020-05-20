@@ -1,14 +1,13 @@
 ---
 title: ajax
 order: 1
-group:
-  title: ajax
-  path: /request
-  order: 5
 nav:
-  title: ajax
-  path: /request
-  order: 6
+  title: 核心
+  path: /list
+group:
+  title: 通用
+  path: /common
+legacy: /common/request
 ---
 
 # request ajax 请求
@@ -23,14 +22,14 @@ import {
   addResponseInterceptor,
   commonRequestInterceptor,
   commonResponseInterceptor,
-} from '@wetrial/core/request';
+} from '@wetrial/core/es/request';
 
 // 添加请求拦截器(自动带上Authority请求头)
 addRequestInterceptor(...commonRequestInterceptor);
 // 添加响应拦截器(处理tip、全局错误等)
 addResponseInterceptor(...commonResponseInterceptor);
 
-export { request, get, post, put, patch } from '@wetrial/core/request';
+export { request, get, post, put, patch } from '@wetrial/core';
 ```
 
 ## 使用方式
