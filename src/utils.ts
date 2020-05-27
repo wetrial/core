@@ -17,7 +17,7 @@ export function urlToList(url?: string): string[] {
   if (!url || url === '/') {
     return ['/'];
   }
-  const urlList = url.split('/').filter((i) => i);
+  const urlList = url.split('/').filter(i => i);
   return urlList.map((_, index) => `/${urlList.slice(0, index + 1).join('/')}`);
 }
 
@@ -119,7 +119,7 @@ export function newGuid(withSplit?: boolean): string {
   const tmp = withSplit
     ? 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'
     : 'xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx';
-  return tmp.replace(/[xy]/g, (c) => {
+  return tmp.replace(/[xy]/g, c => {
     const r = (Math.random() * 16) | 0;
     const v = c === 'x' ? r : (r & 0x3) | 0x8;
     return v.toString(16);
