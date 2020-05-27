@@ -1,11 +1,11 @@
 import axios, { AxiosRequestConfig, Method, AxiosResponse } from 'axios';
-import { omit, assign } from 'lodash';
+import { omit } from 'lodash';
 import { message } from 'antd';
 import { getToken } from './authority';
 import { UnAuthorizedException, UserFriendlyException } from './exception';
 import { newGuid } from './utils';
 import { encrypt, decrypt, encryptKey } from './crypto';
-import { CryptoType } from './types';
+import { CryptoType } from './core';
 
 export interface IRequestOption extends AxiosRequestConfig {
   /**
@@ -50,12 +50,12 @@ const commonRequestInterceptor = [
   (option: any) => {
     const config: IRequestOption = option as IRequestOption;
     const token = getToken();
-    const header: any = {};
     if (token) {
-      header.Authorization = `Bearer ${getToken()}`;
+      config.headers = {
+        ...config.headers,
+        Authorization: `Bearer ${getToken()}`,
+      };
     }
-    assign(config.headers, header);
-
     if (config.crypto) {
       config['cryptoKey'] = newGuid();
       if (config.crypto === CryptoType.In || config.crypto === CryptoType.Both) {
@@ -63,10 +63,11 @@ const commonRequestInterceptor = [
           body: encrypt(config.data, config['cryptoKey']),
         };
       }
-
-      config.headers.Triple_DES_Key = encryptKey(config['cryptoKey']);
+      config.headers = {
+        ...config.headers,
+        Triple_DES_Key: encryptKey(config['cryptoKey']),
+      };
     }
-
     return config;
   },
 ];
@@ -78,7 +79,6 @@ const commonResponseInterceptor = [
   (response: AxiosResponse): any => {
     const { data, config } = response;
     const requestConfig = config as IRequestOption;
-
     if (requestConfig.responseType && requestConfig.responseType.toLowerCase() === 'arraybuffer') {
       return Promise.resolve(data);
     } else {
