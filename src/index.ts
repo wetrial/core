@@ -7,7 +7,7 @@ export { default as store } from './store';
 
 export { base64, debase64, encrypt, decrypt, encryptKey } from './crypto';
 
-export { IKeyValue, IWithFalse, CryptoType } from './types';
+export { IKeyValue, IWithFalse, CryptoType } from './core';
 
 interface IWetrialCoreProps {
   /**
