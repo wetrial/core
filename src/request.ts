@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig, Method, AxiosResponse } from 'axios';
 import { omit } from 'lodash';
 import { message } from 'antd';
 import { getToken } from './authority';
-import { UnAuthorizedException, UserFriendlyException } from './exception';
+// import { UnAuthorizedException, UserFriendlyException, ErrorShowType } from './exception';
 import { newGuid } from './utils';
 import { encrypt, decrypt, encryptKey } from './crypto';
 import { CryptoType } from './core';
@@ -96,20 +96,7 @@ const commonResponseInterceptor = [
     }
   },
   ({ response }: { response: AxiosResponse }) => {
-    const { data, config, status } = response;
-    const requestConfig = config as IRequestOption;
-    if (requestConfig.skipErrorHandler) {
-      return Promise.reject(data);
-    }
-    let exception;
-    if (status === 401) {
-      exception = data as UnAuthorizedException;
-    } else if (status === 500) {
-      exception = data as UserFriendlyException;
-    } else {
-      exception = data;
-    }
-    throw exception;
+    return Promise.reject(response);
   },
 ];
 
