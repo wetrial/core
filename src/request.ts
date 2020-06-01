@@ -1,14 +1,29 @@
 import axios, { AxiosRequestConfig, Method, AxiosResponse } from 'axios';
-
-import { omit, assign } from 'lodash';
+import { omit } from 'lodash';
 import { message } from 'antd';
 import { getToken } from './authority';
-import { UnAuthorizedException, UserFriendlyException } from './exception';
+// import { UnAuthorizedException, UserFriendlyException, ErrorShowType } from './exception';
+import { newGuid } from './utils';
+import { encrypt, decrypt, encryptKey } from './crypto';
+import { CryptoType } from './core';
 
 export interface IRequestOption extends AxiosRequestConfig {
-  successTip?: boolean; // 操作成功是否提示
-  skipErrorHandler?: boolean; // 是否跳过错误处理(主要为后端异常&success为false的时候是否自动弹错误信息)
+  /**
+   * 操作成功是否提示
+   */
+  successTip?: boolean;
+  /**
+   * 是否跳过错误处理(主要为后端异常&success为false的时候是否自动弹错误信息)
+   */
+  skipErrorHandler?: boolean;
+  /**
+   * 请求方式
+   */
   method?: Method;
+  /**
+   * 加密传输方式
+   */
+  crypto?: CryptoType;
 }
 
 // eslint-disable-next-line
@@ -32,13 +47,27 @@ export const configInstance = (config: AxiosRequestConfig) => {
  * 通用请求拦截器
  */
 const commonRequestInterceptor = [
-  (config: any) => {
+  (option: any) => {
+    const config: IRequestOption = option as IRequestOption;
     const token = getToken();
-    const header: any = {};
     if (token) {
-      header.Authorization = `Bearer ${getToken()}`;
+      config.headers = {
+        ...config.headers,
+        Authorization: `Bearer ${getToken()}`,
+      };
     }
-    assign(config.headers, header);
+    if (config.crypto) {
+      config['cryptoKey'] = newGuid();
+      if (config.crypto === CryptoType.In || config.crypto === CryptoType.Both) {
+        config.data = {
+          body: encrypt(config.data, config['cryptoKey']),
+        };
+      }
+      config.headers = {
+        ...config.headers,
+        Triple_DES_Key: encryptKey(config['cryptoKey']),
+      };
+    }
     return config;
   },
 ];
@@ -50,27 +79,24 @@ const commonResponseInterceptor = [
   (response: AxiosResponse): any => {
     const { data, config } = response;
     const requestConfig = config as IRequestOption;
+    if (requestConfig.responseType && requestConfig.responseType.toLowerCase() === 'arraybuffer') {
+      return Promise.resolve(data);
+    } else {
+      if (requestConfig.successTip) {
+        message.success('操作成功', 2);
+      }
 
-    if (requestConfig.successTip) {
-      message.success('操作成功', 2);
+      if (requestConfig.crypto === CryptoType.Out || requestConfig.crypto === CryptoType.Both) {
+        if (typeof data === 'string') {
+          const decryptData = decrypt(data, config['cryptoKey']);
+          return Promise.resolve(JSON.parse(decryptData));
+        }
+      }
+      return Promise.resolve(data);
     }
-    return Promise.resolve(data);
   },
   ({ response }: { response: AxiosResponse }) => {
-    const { data, config, status } = response;
-    const requestConfig = config as IRequestOption;
-    if (requestConfig.skipErrorHandler) {
-      return Promise.reject(data);
-    }
-    let exception;
-    if (status === 401) {
-      exception = data as UnAuthorizedException;
-    } else if (status === 500) {
-      exception = data as UserFriendlyException;
-    } else {
-      exception = data;
-    }
-    throw exception;
+    return Promise.reject(response);
   },
 ];
 
