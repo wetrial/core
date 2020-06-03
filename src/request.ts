@@ -5,7 +5,7 @@ import { getToken } from './authority';
 // import { UnAuthorizedException, UserFriendlyException, ErrorShowType } from './exception';
 import { newGuid } from './utils';
 import { encrypt, decrypt, encryptKey } from './crypto';
-import { CryptoType } from './core';
+import { CryptoType, IKeyValue } from './core';
 
 export interface IRequestOption extends AxiosRequestConfig {
   /**
@@ -44,11 +44,32 @@ export const configInstance = (config: AxiosRequestConfig) => {
 };
 
 /**
+ * 全局设置的header
+ */
+let globalHeaders: () => IKeyValue<string>;
+
+export const configGlobalHeader = (func: () => IKeyValue<string>) => {
+  globalHeaders = func;
+};
+
+/**
  * 通用请求拦截器
  */
 const commonRequestInterceptor = [
   (option: any) => {
     const config: IRequestOption = option as IRequestOption;
+
+    // 全局设置的请求头
+    if (globalHeaders) {
+      const otherHeaders = globalHeaders();
+      if (otherHeaders) {
+        config.headers = {
+          ...config.headers,
+          ...otherHeaders,
+        };
+      }
+    }
+
     const token = getToken();
     if (token) {
       config.headers = {
@@ -68,6 +89,7 @@ const commonRequestInterceptor = [
         Triple_DES_Key: encryptKey(config['cryptoKey']),
       };
     }
+
     return config;
   },
 ];
