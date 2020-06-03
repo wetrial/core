@@ -1,5 +1,8 @@
 // 只导出高频使用的，其他一律通过import {} from '@wetrial/core/es/xxxx' 形式使用
 import { configBase64Map, configRSAKey } from './crypto';
+import { configRoutePrefix } from './route-helper';
+import { configGlobalHeader } from './request';
+import { IKeyValue } from './core';
 
 export { request, get, post, put, del, patch, head, options } from './request';
 
@@ -18,6 +21,14 @@ interface IWetrialCoreProps {
    * crypto中base64使用的map
    */
   Base64MAP?: string;
+  /**
+   * 动态追加的路由前缀
+   */
+  routeProfix?: string;
+  /**
+   * 自定义全局的ajax请求头
+   */
+  getGlobalHeader?: () => IKeyValue<string>;
 }
 
 /**
@@ -27,4 +38,6 @@ interface IWetrialCoreProps {
 export function initWetrialCore(props: IWetrialCoreProps) {
   props.RSAKey && configRSAKey(props.RSAKey);
   props.Base64MAP && configBase64Map(props.Base64MAP);
+  props.routeProfix && configRoutePrefix(props.routeProfix);
+  props.getGlobalHeader && configGlobalHeader(props.getGlobalHeader);
 }

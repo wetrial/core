@@ -5,7 +5,7 @@
  */
 export function filterRoutesByGroups(arr: any[], groups: string[] = []) {
   const result: any[] = [];
-  arr.forEach(item => {
+  arr.forEach((item) => {
     if (!item.group || groups.indexOf(item.group) !== -1) {
       const newItem = item;
       if (item.routes && item.routes.length > 0) {
@@ -28,7 +28,7 @@ export function filterRoutesByGroups(arr: any[], groups: string[] = []) {
  */
 export function findRouteMenuByGroup(arr: any[], group: string): any {
   let result: any;
-  arr.forEach(item => {
+  arr.forEach((item) => {
     if (item.group && item.group === group) {
       result = item;
       return;
@@ -45,13 +45,13 @@ export function findRouteMenuByGroup(arr: any[], group: string): any {
 
 // 路由前缀
 // eslint-disable-next-line import/no-mutable-exports
-let routePrefix = '/:_base(\\d+)?';
+let routePrefix = '/:_base';
 
 /**
  * 要配置的路由前缀
  * @param prefix 路由前缀
  */
-export function configRoutePrefix(prefix) {
+export function configRoutePrefix(prefix: string) {
   routePrefix = prefix;
 }
 
@@ -61,7 +61,7 @@ export function configRoutePrefix(prefix) {
  * @param prefix 要设置的前缀
  */
 export function patchRouteBase(arr: any[]): void {
-  arr.forEach(item => {
+  arr.forEach((item) => {
     // eslint-disable-next-line no-param-reassign
     item.path = `${routePrefix}${item.path}`;
     if (item.routes && item.routes.length > 0) {
