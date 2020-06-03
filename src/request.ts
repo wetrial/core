@@ -12,10 +12,10 @@ export interface IRequestOption extends AxiosRequestConfig {
    * 操作成功是否提示
    */
   successTip?: boolean;
-  /**
-   * 是否跳过错误处理(主要为后端异常&success为false的时候是否自动弹错误信息)
-   */
-  skipErrorHandler?: boolean;
+  // /**
+  //  * 是否跳过错误处理(主要为后端异常&success为false的时候是否自动弹错误信息)
+  //  */
+  // skipErrorHandler?: boolean;
   /**
    * 请求方式
    */

@@ -1,6 +1,6 @@
 ---
 title: ajax
-order: 1
+order: 2
 nav:
   title: 核心
   path: /list
@@ -57,13 +57,25 @@ const result = await get('');
 | ejectRequestInterceptor | 删除请求拦截器 |  |
 | addResponseInterceptor | 添加响应拦截器 |  |
 | ejectResponseInterceptor | 删除响应拦截器 |  |
+| configGlobalHeader | 用于配置全局添加的请求头,一次配置所有请求生效 |  |
 
 ### IRequestOption
 
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | successTip | 是否显示操作成功的提示 | boolean? | get 请求 false,其他 true |
-| skipErrorHandler | 是否不对错误进行拦截处理 | boolean? | get 请求 false,其他 true |
 | url | 请求的 url 地址 | string | - |
 | method | 请求的 method,可以通过扩展方法比如，post 不需要提供该参数 | string? 'post'、'get'、'put','delete','patch' | - |
 | [更多配置](https://github.com/axios/axios#request-config) |  |  | - |
+
+#### commonRequestInterceptor
+
+- 会将 configGlobalHeader 中反回的值设置到 headers 中去
+- 会自动添加 Authorization 请求头,会调用 authority 中的 getToken 方法获取 token 值
+- 根据配置是否加密来对请求内容进行加密以及解密的密钥以请求头的形式传递给后端
+
+#### commonResponseInterceptor
+
+- 根据配置参数 successTip 弹成功提示
+- 根据配置的加密来解密响应内容
+- 处理非 200-302 的请求进入异常处理

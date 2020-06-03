@@ -30,3 +30,7 @@ store.set('', '');
 | get    | 获取缓存对象                    | `(key:string)=>any`                      |
 | remove | 移除指定缓存                    | `(key:string)=>void`                     |
 | clear  | 清空所有缓存                    | `()=>void`                               |
+
+## 其他
+
+store 存储库主要为带过期时间的本地存储而生，非此需求的建议根据情况使用 sessionStorage、localStorage 等
