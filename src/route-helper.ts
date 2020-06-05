@@ -45,7 +45,7 @@ export function findRouteMenuByGroup(arr: any[], group: string): any {
 
 // 路由前缀
 // eslint-disable-next-line import/no-mutable-exports
-let routePrefix = '/:_base';
+let routePrefix = '';
 
 /**
  * 要配置的路由前缀
@@ -61,6 +61,9 @@ export function configRoutePrefix(prefix: string) {
  * @param prefix 要设置的前缀
  */
 export function patchRouteBase(arr: any[]): void {
+  if (!routePrefix) {
+    return;
+  }
   arr.forEach(item => {
     // eslint-disable-next-line no-param-reassign
     item.path = `${routePrefix}${item.path}`;
@@ -68,4 +71,11 @@ export function patchRouteBase(arr: any[]): void {
       patchRouteBase(item.routes);
     }
   });
+}
+
+/**
+ * 获取路由前缀
+ */
+export function getRoutePreFix() {
+  return routePrefix;
 }
