@@ -65,8 +65,14 @@ export function patchRouteBase(arr: any[]): void {
     return;
   }
   arr.forEach(item => {
-    // eslint-disable-next-line no-param-reassign
-    item.path = `${routePrefix}${item.path}`;
+    if (item.path === '/') {
+      // eslint-disable-next-line no-param-reassign
+      item.path = `${routePrefix}`;
+    } else {
+      // eslint-disable-next-line no-param-reassign
+      item.path = `${routePrefix}${item.path}`;
+    }
+
     if (item.routes && item.routes.length > 0) {
       patchRouteBase(item.routes);
     }

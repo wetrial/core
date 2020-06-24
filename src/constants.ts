@@ -104,3 +104,27 @@ export const LAYOUT_COL_SEARCH_SIX = {
 
 // table 显示滚动条的宽度界限
 export const TABLE_SCROLL_WIDTH = 'max-content';
+
+// 平台分组
+export const GROUP = {
+  /**
+   * 平台
+   */
+  PLATFORM: '0',
+  /**
+   * 申办方
+   */
+  SPONSOR: '1',
+  /**
+   * 机构
+   */
+  STUDYSITE: '2',
+  /**
+   * 伦理
+   */
+  ETHIC: '3',
+  /**
+   * SMO
+   */
+  SMO: '4',
+};
