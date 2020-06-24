@@ -73,6 +73,17 @@ export function patchRouteBase(arr: any[]): void {
       item.path = `${routePrefix}${item.path}`;
     }
 
+    // 处理redirect的情况
+    if (item.redirect) {
+      if (item.redirect === '/') {
+        // eslint-disable-next-line no-param-reassign
+        item.redirect = `${routePrefix}`;
+      } else {
+        // eslint-disable-next-line no-param-reassign
+        item.redirect = `${routePrefix}${item.redirect}`;
+      }
+    }
+
     if (item.routes && item.routes.length > 0) {
       patchRouteBase(item.routes);
     }
@@ -85,3 +96,27 @@ export function patchRouteBase(arr: any[]): void {
 export function getRoutePreFix() {
   return routePrefix;
 }
+
+// 平台分组
+export const GROUP = {
+  /**
+   * 平台
+   */
+  PLATFORM: '0',
+  /**
+   * 申办方
+   */
+  SPONSOR: '1',
+  /**
+   * 机构
+   */
+  STUDYSITE: '2',
+  /**
+   * 伦理
+   */
+  ETHIC: '3',
+  /**
+   * SMO
+   */
+  SMO: '4',
+};
