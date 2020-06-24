@@ -103,4 +103,4 @@ export const LAYOUT_COL_SEARCH_SIX = {
 };
 
 // table 显示滚动条的宽度界限
-export const TABLE_SCROLL_WIDTH = 1300;
+export const TABLE_SCROLL_WIDTH = 'max-content';
