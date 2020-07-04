@@ -8,7 +8,7 @@ export { request, get, post, put, del, patch, head, options } from './request';
 
 export { default as store } from './store';
 
-export { base64, debase64, encrypt, decrypt, encryptKey } from './crypto';
+export { base64, debase64, encrypt, decrypt, encryptKey, encryptBtoa, decryptAtob } from './crypto';
 
 export type { IKeyValue, IWithFalse } from './core';
 

@@ -199,3 +199,27 @@ export function encryptSectionWithEncode(content: string | object): string {
   }
   return encodeURIComponent(encryptSection(result as string));
 }
+
+/**
+ * 简单的将内容转二进制
+ * @param data 要转换的数据
+ */
+export function encryptBtoa(data: any[] | object | string): string {
+  let strData;
+  if (Array.isArray(data) || typeof data === 'object') {
+    strData = JSON.stringify(data);
+  } else {
+    strData = data;
+  }
+  // 处理中文问题
+  strData = encodeURIComponent(strData);
+  return btoa(strData);
+}
+
+/**
+ * 将字符串内容二进制解码
+ * @param data 要解码的二进制内容
+ */
+export function decryptAtob(data: string): string {
+  return decodeURIComponent(atob(data));
+}
