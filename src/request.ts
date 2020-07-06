@@ -46,6 +46,7 @@ export const configInstance = (config: AxiosRequestConfig) => {
 /**
  * 全局设置的header
  */
+// eslint-disable-next-line import/no-mutable-exports
 let globalHeaders: () => IKeyValue<string>;
 
 export const configGlobalHeader = (func: () => IKeyValue<string>) => {
@@ -80,9 +81,7 @@ const commonRequestInterceptor = [
     if (config.crypto) {
       config['cryptoKey'] = newGuid();
       if (config.crypto === CryptoType.In || config.crypto === CryptoType.Both) {
-        config.data = {
-          body: encrypt(config.data, config['cryptoKey']),
-        };
+        config.data = encrypt(config.data, config['cryptoKey']);
       }
       config.headers = {
         ...config.headers,
@@ -216,6 +215,7 @@ function ejectResponseInterceptor(interceptorId: number) {
 export {
   axios,
   instance,
+  globalHeaders,
   commonRequestInterceptor,
   commonResponseInterceptor,
   addRequestInterceptor,
