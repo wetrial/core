@@ -3,35 +3,32 @@ import { setToken, getToken, clearToken } from './authority';
 describe('store', () => {
   describe('setToken && getToken && clearToken', () => {
     it('without exp', () => {
-      setToken('test');
+      setToken({
+        token: 'test',
+      });
       const token = getToken();
-      expect(token).toEqual('test');
+      expect(token.token).toEqual('test');
     });
   });
 
   describe('setToken with exp', () => {
     it('without exp', () => {
-      setToken('test', 100);
+      setToken({ token: 'test' }, 1);
       setTimeout(() => {
         const token = getToken();
         expect(token).toEqual(null);
-      }, 101);
+      }, 1.1);
     });
   });
 
   describe('setToken with clearToken', () => {
     it('without exp', () => {
-      setToken('test');
+      setToken({
+        token: 'test',
+      });
       clearToken();
       const token = getToken();
       expect(token).toEqual(null);
     });
   });
-
-  // describe('setPermissions && getPermissions', () => {
-  //   it('without exp', () => {
-  //     setPermissions(['admin', 'rolemanager']);
-  //     expect(getPermissions()).toEqual(['admin', 'rolemanager']);
-  //   });
-  // });
 });

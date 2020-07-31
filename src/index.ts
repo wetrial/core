@@ -1,7 +1,7 @@
 // 只导出高频使用的，其他一律通过import {} from '@wetrial/core/es/xxxx' 形式使用
 import { configBase64Map, configRSAKey } from './crypto';
 import { configRoutePrefix } from './route-helper';
-import { configGlobalHeader } from './request';
+import { configGlobalHeader, configRefreshToken } from './request';
 import { IKeyValue } from './core';
 
 export { request, get, post, put, del, patch, head, options } from './request';
@@ -31,6 +31,10 @@ interface IWetrialCoreProps {
    * 自定义全局的ajax请求头
    */
   getGlobalHeader?: () => IKeyValue<string>;
+  /**
+   * 配置置换token的请求
+   */
+  configRefreshToken?: () => Promise<any>;
 }
 
 /**
@@ -42,4 +46,5 @@ export function initWetrialCore(props: IWetrialCoreProps) {
   props.Base64MAP && configBase64Map(props.Base64MAP);
   props.routeProfix && configRoutePrefix(props.routeProfix);
   props.getGlobalHeader && configGlobalHeader(props.getGlobalHeader);
+  props.configRefreshToken && configRefreshToken(props.configRefreshToken);
 }

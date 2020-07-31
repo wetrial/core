@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig, Method, AxiosResponse } from 'axios';
 import { omit } from 'lodash';
 import { message } from 'antd';
-import { getToken } from './authority';
+import { getToken, setToken } from './authority';
 // import { UnAuthorizedException, UserFriendlyException, ErrorShowType } from './exception';
 import { newGuid } from './utils';
 import { encrypt, decrypt, encryptKey } from './crypto';
@@ -12,10 +12,6 @@ export interface IRequestOption extends AxiosRequestConfig {
    * 操作成功是否提示
    */
   successTip?: boolean;
-  // /**
-  //  * 是否跳过错误处理(主要为后端异常&success为false的时候是否自动弹错误信息)
-  //  */
-  // skipErrorHandler?: boolean;
   /**
    * 请求方式
    */
@@ -54,6 +50,17 @@ export const configGlobalHeader = (func: () => IKeyValue<string>) => {
 };
 
 /**
+ * 全局设置刷新token请求
+ */
+let refreshToken: () => Promise<any> = () => {
+  return Promise.reject(new Error('尚未初始化refreshToken'));
+};
+
+export const configRefreshToken = (func: () => Promise<any>) => {
+  refreshToken = func;
+};
+
+/**
  * 通用请求拦截器
  */
 const commonRequestInterceptor = [
@@ -71,11 +78,11 @@ const commonRequestInterceptor = [
       }
     }
 
-    const token = getToken();
-    if (token) {
+    const tokenStore = getToken();
+    if (tokenStore && tokenStore.token) {
       config.headers = {
         ...config.headers,
-        Authorization: `Bearer ${getToken()}`,
+        Authorization: `Bearer ${tokenStore.token}`,
       };
     }
     if (config.crypto) {
@@ -118,6 +125,75 @@ const commonResponseInterceptor = [
   },
   ({ response }: { response: AxiosResponse }) => {
     return Promise.reject(response);
+  },
+];
+
+// 是否正在刷新的标记
+let isRefreshing = false;
+// 重试队列，每一项将是一个待执行的函数形式
+let requests: Function[] = [];
+
+/**
+ * 通用响应拦截，拦截异常信息(非200-302之间的状态码)、未授权等
+ */
+const commonResponseWithRefreshTokenInterceptor = [
+  (response: AxiosResponse): any => {
+    const { data, config } = response;
+    const requestConfig = config as IRequestOption;
+    if (requestConfig.responseType && requestConfig.responseType.toLowerCase() === 'arraybuffer') {
+      return Promise.resolve(data);
+    } else {
+      if (requestConfig.successTip) {
+        message.success('操作成功', 2);
+      }
+
+      if (requestConfig.crypto === CryptoType.Out || requestConfig.crypto === CryptoType.Both) {
+        if (typeof data === 'string') {
+          const decryptData = decrypt(data, config['cryptoKey']);
+          return Promise.resolve(JSON.parse(decryptData));
+        }
+      }
+      return Promise.resolve(data);
+    }
+  },
+  ({ response }: { response: AxiosResponse }) => {
+    if (!response || response.status !== 401) {
+      return Promise.reject(response);
+    }
+    const token = getToken();
+    if (!token) {
+      return Promise.reject(response);
+    }
+    const { config } = response;
+    // 401 而且有本地token说明token过期需要刷token
+    if (!isRefreshing) {
+      isRefreshing = true;
+
+      return refreshToken()
+        .then((result) => {
+          if (!result || !result.token) {
+            throw new Error('刷新token失败，没有获取到新token');
+          }
+          setToken({
+            token: result.token,
+            refreshToken: result.refreshToken,
+          });
+          // 已经刷新了token，将所有队列中的请求进行重试
+          requests.forEach((cb) => cb());
+          requests = [];
+          return request(config);
+        })
+        .finally(() => {
+          isRefreshing = false;
+        });
+    } else {
+      // 正在刷新token，将返回一个未执行resolve的promise
+      return new Promise((resolve) => {
+        requests.push(() => {
+          resolve(request(config));
+        });
+      });
+    }
   },
 ];
 
@@ -218,6 +294,7 @@ export {
   globalHeaders,
   commonRequestInterceptor,
   commonResponseInterceptor,
+  commonResponseWithRefreshTokenInterceptor,
   addRequestInterceptor,
   ejectRequestInterceptor,
   addResponseInterceptor,
