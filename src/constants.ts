@@ -1,3 +1,5 @@
+import { TablePaginationConfig } from 'antd/lib/table';
+
 /**
  * 表单项单列布局 响应式配置(建议赋到Form上)
  */
@@ -126,11 +128,36 @@ export const LAYOUT_CHECK_EIGHT = {
   xxl: 3,
 };
 
-// table 显示滚动条的宽度界限
+/**
+ * 显示滚动条的宽度界限
+ */
 export const TABLE_SCROLL_WIDTH = 'max-content';
 
-// 默认日期时间格式
+/**
+ * 默认日期时间格式
+ */
 export const DEFAULT_DATE_TIME_FORMAT = 'YYYY-MM-DD HH:mm:ss';
 
-// 默认日期时间
+/**
+ * 默认日期时间
+ */
 export const DEFAULT_DATE_FORMAT = 'YYYY-MM-DD';
+
+/**
+ * 默认页码
+ */
+export const PAGE_SIZE = 10;
+
+/**
+ * 通用分页属性配置
+ */
+export const PAGE_PROPS: TablePaginationConfig = {
+  defaultCurrent: 1,
+  total: 1,
+  pageSize: PAGE_SIZE,
+  defaultPageSize: PAGE_SIZE,
+  // showSizeChanger: true,
+  hideOnSinglePage: true,
+  // showQuickJumper:true,
+  showTotal: (total, [start, end]) => `第${start}-${end}条，共${total}条`,
+};
